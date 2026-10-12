@@ -23,10 +23,10 @@ Báo cáo chu kỳ lớn (2 tháng, quý, năm) cung cấp góc nhìn vĩ mô v�
 ## ⚡ 2. Báo cáo Hàng tuần (Weekly Reports)
 Theo dõi nhịp đập nhanh hàng tuần, phản ánh chuyển động của thị trường, mô hình mới và bài báo nóng.
 
-* **[Tuần 41/2026] Hậu làn sóng Frontier & Động thái đầu tháng 10** (`content/weekly/2026-w41.mdx`)
+* **[Tuần 41/2026] Dư Chấn Sau Làn Sóng Frontier, Mistral Large 4 Xuất Trận & Thử Lửa Thực Địa** (`content/weekly/2026-w41.mdx`)
   * *Khoảng thời gian*: 05/10/2026 – 11/10/2026
   * *Báo cáo gốc quy chiếu*: `overview-2026-08-09`
-  * *Nội dung*: Đánh giá ban đầu về Gemini 4 Argon trong production, triển khai thực địa Figure 03, sơ kết tuân thủ EU AI Act sau 2 tháng.
+  * *Nội dung*: Mistral Large 4 "le Chonk" 1.05T MoE Sovereign AI, Claude Haiku 5.5 hoàn tất bộ ba, OpenAI Intelligent UI & hoãn GPT-6.1 Astra, kiểm thử thông lượng 1M token Gemini 4 Argon trong Fairwind, Figure 03 tại nhà máy BMW Spartanburg, 14 trát giải trình Điều 50 EU AI Act.
 
 ---
 

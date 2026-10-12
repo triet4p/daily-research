@@ -36,16 +36,16 @@
     {
       "id": "weekly-2026-w41",
       "slug": "2026-w41",
-      "title": "Báo cáo Tuần 41/2026: Dư chấn sau làn sóng Frontier & Động thái đầu tháng 10",
-      "subtitle": "Hậu Meta Connect 2026, phản hồi ban đầu về Gemini 4 Argon và chiến sự mô hình thế giới",
+      "title": "Báo cáo Tuần 41/2026: Dư Chấn Sau Làn Sóng Frontier, Mistral Large 4 Xuất Trận & Thử Lửa Thực Địa",
+      "subtitle": "Mistral công bố 'le Chonk' 1.05T MoE, Claude Haiku 5.5 hoàn tất bộ ba, OpenAI ra mắt Intelligent UI và kiểm thử 1M output tokens của Gemini 4",
       "week_number": 41,
       "year": 2026,
       "period": "05/10/2026 – 11/10/2026",
       "published_at": "2026-10-12",
-      "reading_time": "8 phút",
+      "reading_time": "14 phút",
       "parent_overview_id": "overview-2026-08-09",
-      "summary": "Cập nhật tiếp nối bản toàn cảnh 2 tháng: Các benchmark độc lập đầu tiên của Gemini 4 Argon, triển khai thực tế của Figure 03 tại xưởng sản xuất, và đánh giá tác động tuân thủ EU AI Act sau 2 tháng có hiệu lực.",
-      "tags": ["Gemini 4", "Figure 03", "EU AI Act", "Agentic Systems"]
+      "summary": "Cập nhật nhịp đập nghiên cứu tuần đầu tháng 10/2026: Mistral AI làm rung chuyển thị trường với Mistral Large 4 (1.05T tham số), Anthropic ra mắt Claude Haiku 5.5, OpenAI triển khai Intelligent UI trong khi hoãn GPT-6.1 Astra vì an toàn, kiểm thử thực tế 1M token của Gemini 4 Argon, và triển khai Figure 03 tại nhà máy BMW.",
+      "tags": ["Mistral Large 4", "Gemini 4 Argon", "Claude Haiku 5.5", "OpenAI Intelligent UI", "Figure 03", "EU AI Act", "Sovereign AI"]
     }
   ],
   "deep_dives": [
