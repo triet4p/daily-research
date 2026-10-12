@@ -28,13 +28,13 @@ export default async function WeeklyArticlePage({
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
       {/* Breadcrumb */}
-      <div className="mb-6 flex flex-wrap items-center gap-2 text-xs text-gray-400">
-        <Link href="/" className="inline-flex items-center gap-1 transition hover:text-cyan-400">
+      <div className="mb-6 flex flex-wrap items-center gap-2 text-xs text-[var(--text-muted)]">
+        <Link href="/" className="inline-flex items-center gap-1 transition hover:text-[var(--accent)]">
           <ArrowLeft className="h-3.5 w-3.5" />
           <span>Dashboard</span>
         </Link>
         <span>/</span>
-        <Link href="/weekly" className="transition hover:text-cyan-400">
+        <Link href="/weekly" className="transition hover:text-[var(--accent)]">
           Báo cáo Hàng tuần
         </Link>
         {parentOverview && (
@@ -42,9 +42,9 @@ export default async function WeeklyArticlePage({
             <span>/</span>
             <Link
               href={`/overview/${parentOverview.slug}`}
-              className="flex items-center gap-1 text-cyan-400/90 hover:underline line-clamp-1"
+              className="flex items-center gap-1 text-[var(--accent)] hover:underline line-clamp-1 font-medium"
             >
-              <Layers className="h-3 w-3" />
+              <Layers className="h-3.5 w-3.5" />
               <span>{parentOverview.title}</span>
             </Link>
           </>
@@ -52,25 +52,25 @@ export default async function WeeklyArticlePage({
       </div>
 
       {/* Header Info */}
-      <header className="border-b border-gray-800 pb-6">
+      <header className="border-b border-[var(--border-subtle)] pb-6">
         <div className="flex flex-wrap items-center gap-2 text-xs">
-          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-3 py-1 font-semibold text-emerald-400 border border-emerald-500/20">
+          <span className="inline-flex items-center gap-1 rounded-full bg-[var(--accent-light)] px-3 py-1 font-semibold text-[var(--accent)] border border-[var(--accent-border)]">
             <Calendar className="h-3.5 w-3.5" />
             TUẦN {meta.week_number} • {meta.year}
           </span>
-          <span className="text-gray-400 font-mono">{meta.period}</span>
-          <span className="flex items-center gap-1 text-gray-400">
+          <span className="text-[var(--text-muted)] font-mono">{meta.period}</span>
+          <span className="flex items-center gap-1 text-[var(--text-muted)]">
             <Clock className="h-3.5 w-3.5" />
             {meta.reading_time}
           </span>
         </div>
 
-        <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl leading-tight">
+        <h1 className="mt-4 font-serif text-3xl font-bold tracking-tight text-[var(--text-main)] sm:text-4xl lg:text-5xl leading-[1.2]">
           {meta.title}
         </h1>
 
         {meta.subtitle && (
-          <p className="mt-3 text-base font-medium text-emerald-300/90 sm:text-lg">
+          <p className="mt-3 text-base font-medium text-[var(--accent)] sm:text-lg">
             {meta.subtitle}
           </p>
         )}
@@ -80,9 +80,9 @@ export default async function WeeklyArticlePage({
             {meta.tags.map((tag: string) => (
               <span
                 key={tag}
-                className="inline-flex items-center gap-1 rounded-md bg-gray-800/80 px-2 py-0.5 text-xs text-gray-300 border border-gray-700/60"
+                className="inline-flex items-center gap-1 rounded-md bg-[var(--bg-surface-elevated)] px-2 py-0.5 text-xs text-[var(--text-muted)] border border-[var(--border-subtle)]"
               >
-                <Tag className="h-3 w-3 text-emerald-400" />
+                <Tag className="h-3 w-3 text-[var(--accent)]" />
                 {tag}
               </span>
             ))}
@@ -90,7 +90,7 @@ export default async function WeeklyArticlePage({
         )}
       </header>
 
-      {/* TOP PROMINENT REFER BANNER (User explicitly requested!) */}
+      {/* TOP PROMINENT REFER BANNER */}
       {parentOverview && (
         <ReferencedOverviewBanner
           overview={parentOverview}
@@ -105,8 +105,8 @@ export default async function WeeklyArticlePage({
 
       {/* BOTTOM PROMINENT REFER BANNER */}
       {parentOverview && (
-        <div className="mt-14 border-t border-gray-800 pt-8">
-          <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+        <div className="mt-14 border-t border-[var(--border-subtle)] pt-8">
+          <div className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-2">
             Liên kết Báo cáo Gốc
           </div>
           <ReferencedOverviewBanner

@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { marked } from "marked";
+import katex from "katex";
 
 const contentDirectory = path.join(process.cwd(), "content");
 
@@ -66,6 +67,42 @@ export interface ArticleData {
   htmlContent: string;
 }
 
+marked.setOptions({
+  gfm: true,
+  breaks: false,
+});
+
+function renderLatex(text: string): string {
+  // 1. Display Math: $$ ... $$
+  let res = text.replace(/\$\$([\s\S]+?)\$\$/g, (_, math) => {
+    try {
+      return `\n\n<div class="math-block">${katex.renderToString(math.trim(), { displayMode: true, throwOnError: false, strict: "ignore" })}</div>\n\n`;
+    } catch {
+      return `$$${math}$$`;
+    }
+  });
+
+  // 2. Protect currencies: $0.042, $0, $10, $5, $150.80, $0.00008, $0.0178, $0.0065
+  res = res.replace(/\$(\d+(?:[.,]\d+)?)(?!\s*\\times|\s*\\pm|\s*\\ge|\s*\\le)/g, "&dollar;$1");
+
+  // 3. Inline Math: $ ... $, excluding standard currencies and plain Vietnamese text
+  res = res.replace(/(^|[^\w\$])\$([^\$\n]+?)\$(?!\w)/g, (match, prefix, math) => {
+    const trimmed = math.trim();
+    // If it contains Vietnamese accented letters, it's not a math formula
+    if (/[àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ]/i.test(trimmed)) {
+      return match;
+    }
+    try {
+      const rendered = katex.renderToString(trimmed, { displayMode: false, throwOnError: true, strict: "ignore" });
+      return `${prefix}${rendered}`;
+    } catch {
+      return match;
+    }
+  });
+
+  return res;
+}
+
 export function getManifest(): Manifest {
   const manifestPath = path.join(contentDirectory, "manifest.json");
   if (!fs.existsSync(manifestPath)) {
@@ -86,9 +123,9 @@ export function getOverviewBySlug(slug: string): (ArticleData & { manifestItem?:
 
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
-  const htmlContent = marked.parse(content) as string;
+  const processedContent = renderLatex(content);
+  const htmlContent = marked.parse(processedContent) as string;
 
-  // Resolve related deep-dives
   const deepDiveIds = manifestItem?.deep_dive_ids || (data.deep_dive_ids as string[]) || [];
   const relatedDeepDives = manifest.deep_dives.filter((d) => deepDiveIds.includes(d.id));
 
@@ -117,9 +154,9 @@ export function getDeepDiveBySlug(slug: string): (ArticleData & { manifestItem?:
 
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
-  const htmlContent = marked.parse(content) as string;
+  const processedContent = renderLatex(content);
+  const htmlContent = marked.parse(processedContent) as string;
 
-  // Resolve parent overview
   const parentId = manifestItem?.parent_overview_id || (data.parent_overview_id as string);
   const parentOverview = manifest.overviews.find((o) => o.id === parentId);
 
@@ -151,9 +188,9 @@ export function getWeeklyBySlug(slug: string): (ArticleData & { manifestItem?: M
 
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
-  const htmlContent = marked.parse(content) as string;
+  const processedContent = renderLatex(content);
+  const htmlContent = marked.parse(processedContent) as string;
 
-  // Resolve parent overview
   const parentId = manifestItem?.parent_overview_id || (data.parent_overview_id as string);
   const parentOverview = manifest.overviews.find((o) => o.id === parentId);
 
