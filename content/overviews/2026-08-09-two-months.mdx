@@ -2,32 +2,36 @@
 id: "overview-2026-08-09"
 slug: "2026-08-09-two-months"
 title: "Báo cáo Toàn cảnh AI: Tháng 8 – Cuối tháng 9/2026"
-subtitle: "Kỷ nguyên Test-Time Compute, Trillion-Scale MoE, Cột mốc Humanoid IPO và Giờ G thực thi EU AI Act"
+subtitle: "Kỷ nguyên Test-Time Compute, Trillion-Scale MoE, Đột phá CoRL 2026, Decision Models (System 1), Unitree IPO và EU AI Act"
 period: "01/08/2026 – 30/09/2026"
 published_at: "2026-10-12"
-reading_time: "15 phút"
+reading_time: "18 phút"
 author: "AI Research Intelligence Lab"
-tags: ["Frontier Models", "Open-Weights", "Humanoid Robotics", "EU AI Act", "Test-Time Compute", "Engram Memory"]
+tags: ["Frontier Models", "Open-Weights", "CoRL 2026", "Decision Models", "Humanoid Robotics", "EU AI Act", "Test-Time Compute", "Engram Memory"]
 deep_dive_ids:
   - "prefix-sliding-test-time-compute"
   - "deepseek-v4-engram-memory"
   - "unitree-humanoid-ipo-and-superman"
-summary: "Toàn cảnh bước nhảy vọt quý 3/2026: GPT-6 series & Gemini 4 Argon (1M output token), làn sóng mã nguồn mở DeepSeek-V4 và Qwen 3.8, Unitree IPO rực sáng sàn chứng khoán, Điều 50 EU AI Act có hiệu lực pháp lý."
+  - "corl-2026-robot-learning-agentic-stack"
+  - "system-1-decision-models-jev-laya"
+summary: "Toàn cảnh bước nhảy vọt quý 3/2026: GPT-6 series & Gemini 4 Argon (1M output token), MoE nghìn tỷ tham số DeepSeek-V4 và Qwen 3.8, CoRL 2026 phá vỡ Monolithic VLA sang Robotic Agentic Stack, Decision Models (System 1) xóa bỏ JSON Streaming Tax, Unitree IPO rực sáng, và Điều 50 EU AI Act có hiệu lực pháp lý."
 ---
 
 # Báo cáo Toàn cảnh AI: Tháng 8 – Cuối tháng 9/2026
 
-Giai đoạn hai tháng từ đầu tháng 8 đến cuối tháng 9/2026 ghi nhận một sự chuyển dịch kiến trúc mang tính bản lề của toàn ngành AI toàn cầu: **chuyển trọng tâm từ đua số lượng tham số tiền huấn luyện (pre-training parameter scaling) sang tối ưu hóa ngân sách suy luận lúc suy luận (Test-Time Compute & Adaptive Reasoning)**. Đồng thời, đây cũng là giai đoạn các hệ thống Agent tự hành (Computer-Use) bắt đầu trưởng thành, robot hình người (Humanoid Robotics) tiến vào sàn chứng khoán và các khung pháp lý quốc tế chính thức kích hoạt chế tài xử phạt.
+Giai đoạn hai tháng từ đầu tháng 8 đến cuối tháng 9/2026 ghi nhận một sự chuyển dịch kiến trúc mang tính bản lề của toàn ngành AI toàn cầu: **chuyển trọng tâm từ đua số lượng tham số tiền huấn luyện (pre-training parameter scaling) sang tối ưu hóa ngân sách suy luận lúc thực thi (Test-Time Compute & Adaptive Reasoning)**. Đồng thời, đây cũng là giai đoạn các hệ thống Agent tự hành bắt đầu phân hóa rõ rệt giữa **Decision Model (System 1 - phản xạ siêu tốc 30ms)** và **Generative Reasoner (System 2 - suy nghĩ đa bước)**; lĩnh vực Robot học (Embodied AI) chứng kiến hội nghị **CoRL 2026** phá vỡ tư duy "chính sách nguyên khối" (Monolithic VLA) sang kiến trúc đa tầng; các hãng robot hình người tiến vào sàn chứng khoán; và khung pháp lý **EU AI Act** chính thức kích hoạt chế tài xử phạt.
 
 ---
 
-## 🎯 5 Trọng Tâm Cốt Lõi Cần Nắm
+## 🎯 7 Trọng Tâm Cốt Lõi Cần Nắm
 
 1. **Frontier Models thế hệ mới:** OpenAI kích hoạt chuỗi phát hành GPT-6 (Astra, Sol, Luna), Google DeepMind tung **Gemini 4 Argon** với giới hạn sinh đầu ra kỷ lục **1.000.000 tokens**, và Anthropic trình làng **Claude Opus 5.5 & Sonnet 5.5**.
 2. **Kỷ nguyên Trillion-Scale MoE Mã Nguồn Mở:** Alibaba công bố **Qwen3.8-Max** (2.4T tham số), Moonshot triển khai **Kimi K3** (2.8T tham số), và DeepSeek ra mắt **DeepSeek-V4-Pro** (1.6T tham số) kèm bản V4.1-Flash với cơ chế bộ nhớ sinh học **Engram**.
-3. **Bước nhảy vọt của Robot Hình Người:** Unitree Robotics chính thức IPO trên sàn STAR Thượng Hải (cổ phiếu tăng +620%), đồng thời ra mắt nguyên mẫu chạy nhanh kỷ lục 12.66 m/s; Figure AI vận hành nền tảng crowdsourcing dữ liệu thị giác *Index*.
-4. **EU AI Act bước vào giai đoạn chế tài:** Ngày 02/08/2026 đánh dấu mốc 24 tháng hiệu lực, kích hoạt **Điều 50** bắt buộc minh bạch hóa tương tác AI và nhúng watermark kiểm soát nội dung tổng hợp.
-5. **Đột phá Tối ưu hóa Inference (ArXiv):** Kỹ thuật *Prefix Sliding* của Stanford giải quyết triệt để nguy cơ tràn KV-cache khi chuỗi tư duy dài (CoT), tăng tốc độ giải mã lên $3\times$ mà không cần fine-tune lại mô hình.
+3. **CoRL 2026 Accepted Papers — Tái định hình Robot Learning:** Phá vỡ xu hướng Monolithic VLA (Pixel-to-Torque) để chuyển sang Robotic Agentic Ecosystem đa tầng: điều khiển tuân thủ xúc giác vi mô **DexFLEX**, giám sát tiến độ semantic **TOPReward**, nhà máy tổng hợp quỹ đạo **VLK**, kiểm định an toàn counterfactual **StressDream**, và tự cải tiến **ENPIRE**.
+4. **Sự Trỗi Dậy của Decision Models (System 1):** TypeSafe ra mắt **Jev System 1** và mô hình mở **Laya**, giải phóng kỹ sư khỏi "JSON Streaming Tax" (chờ 2–5s chỉ để lấy 1 enum), thiết lập Typed Decision Contract và 4 mẫu hình phối hợp System 1 $\times$ System 2 trong kiến trúc Agent.
+5. **Bước nhảy vọt của Robot Hình Người Thương Mại:** Unitree Robotics chính thức IPO trên sàn STAR Thượng Hải (cổ phiếu tăng +620%), đồng thời ra mắt nguyên mẫu chạy nhanh kỷ lục 12.66 m/s; Figure AI vận hành nền tảng crowdsourcing dữ liệu thị giác *Index*.
+6. **EU AI Act bước vào giai đoạn chế tài:** Ngày 02/08/2026 đánh dấu mốc 24 tháng hiệu lực, kích hoạt **Điều 50** bắt buộc minh bạch hóa tương tác AI và nhúng watermark kiểm soát nội dung tổng hợp.
+7. **Đột phá Tối ưu hóa Inference (ArXiv):** Kỹ thuật *Prefix Sliding* của Stanford giải quyết triệt để nguy cơ tràn KV-cache khi chuỗi tư duy dài (CoT), tăng tốc độ giải mã lên $3\times$ mà không cần fine-tune lại mô hình.
 
 ---
 
@@ -71,24 +75,55 @@ Tháng 8 và 9/2026 ghi nhận các đại diện nguồn mở đạt đến quy
 
 ---
 
-## 3. Embodied AI & Humanoid Robotics (Robot Hình Người)
+## 3. CoRL 2026 & Embodied AI (Robot Học Đa Tầng)
 
-Đây là giai đoạn thị trường chuyển đổi từ những video biểu diễn ngắn sang **sàn đấu thương mại hóa thực tế và thị trường vốn**.
+### Bước Ngoặt CoRL 2026: Phá Vỡ Chính Sách Nguyên Khối (Monolithic VLA)
+Hội nghị **CoRL 2026 (Conference on Robot Learning)** công bố các công trình accepted trong giai đoạn tháng 8–9/2026 đã mang lại một kết luận mang tính định hình: **Chính sách nguyên khối (End-to-End Pixel-to-Torque) đã chạm trần vật lý**. Việc ép một mô hình neural duy nhất vừa hiểu ngữ nghĩa, vừa tính toán hình học, vừa kiểm soát lực tiếp xúc vi mô dẫn đến độ giòn gãy (brittleness) nghiêm trọng khi ra thực địa.
 
-### Cơn sốt IPO của Unitree Robotics (19/08/2026)
-* Unitree chính thức niêm yết trên sàn STAR Thượng Hải (mã 688836), huy động 6,1 tỷ NDT (~900 triệu USD). Giá cổ phiếu tăng vọt **+620% ngay ngày đầu tiên**, đưa định giá công ty lên xấp xỉ 50 tỷ USD trước khi điều chỉnh.
-* **Nguyên mẫu "Superman":** Tại Hội nghị Robot Thế giới Bắc Kinh, Unitree trình diễn mẫu robot thử nghiệm hai chân đạt **tốc độ chạy 12.66 m/s (28.3 mph)** và **bật nhảy cao 2.0 mét**, phá vỡ mọi kỷ lục động lực học của robot hai chân trước đó.
+Thay vào đó, CoRL 2026 thiết lập mô hình **Robotic Agentic Ecosystem** đa tần số:
+* **Tầng vĩ mô (0.1–1 Hz):** Quản lý ngữ nghĩa và phê bình tiến độ (**TOPReward**, đạt ~0.947 VOC tương quan đánh giá).
+* **Tầng trung gian (5–50 Hz):** Định tuyến kỹ năng và tạo quỹ đạo hình học (kết hợp dữ liệu mô phỏng từ **VLK Synthetic Factory** với 48.000+ quỹ đạo không cần teleop người).
+* **Tầng vi mô (50–100 Hz):** Điều khiển tuân thủ xúc giác tiếp xúc bàn tay khéo léo (**DexFLEX**, nâng tỷ lệ thành công từ 29.2% lên 78.3% mà không cần train lại policy cấp cao).
+* **Kiểm định an toàn Tail-Risk:** Dùng mô hình thế giới khuếch tán để chủ động săn lùng lỗi hiếm gặp (**StressDream**, tăng recall phát hiện lỗi từ 54% lên 94%).
+* **Tự cải tiến có kiểm soát:** Vòng lặp cải tiến theo chi phí tối thiểu (**ENPIRE**).
 
-### Figure AI và Nền tảng Dữ liệu "Index"
-* Ngày 25/08/2026, Figure ra mắt nền tảng *Index*, giải quyết điểm nghẽn thiếu hụt dữ liệu thế giới vật lý bằng cách crowdsource video người thật. Nền tảng thu hút 70.000 người dùng, thu nạp 35 phút video mỗi giây phục vụ huấn luyện mô hình thế giới *Helix*.
-* Chuyển đổi hoàn toàn sang thế hệ **Figure 03** trong các nhà máy lắp ráp ô tô, đồng thời chính thức cho nghỉ hưu và tiêu hủy dàn Figure 02 cũ để bảo mật phần cứng độc quyền.
+> 💡 **Bài viết chuyên sâu liên quan**: Khám phá toàn cảnh kiến trúc đa tầng và 5 công trình CoRL 2026:
+> 👉 Xem bài: **[Toàn cảnh CoRL 2026: Phá Vỡ Monolithic VLA & Kiến Trúc Robot Đa Tầng](/deep-dives/corl-2026-robot-learning-agentic-stack)**
 
-> 💡 **Bài viết chuyên sâu liên quan**: Phân tích chi tiết sự kiện IPO, thông số động lực học của nguyên mẫu Superman và cuộc đối đầu giữa Unitree, Figure và Tesla:
+### Thị Trường Thương Mại: Unitree IPO & Figure AI
+* **Unitree Robotics IPO (19/08/2026, mã 688836 trên sàn STAR Thượng Hải):** Cổ phiếu tăng vọt **+620% ngay ngày đầu tiên**, đưa định giá chạm mốc 50 tỷ USD. Trình diễn nguyên mẫu robot hai chân **"Superman"** chạy kỷ lục **12.66 m/s (28.3 mph)** và nhảy cao **2.0m**.
+* **Figure AI & Nền tảng "Index" (25/08/2026):** Thu thập 35 phút video người thật mỗi giây từ 70.000 người dùng để huấn luyện mô hình nền tảng vật lý *Helix*; chuyển sang dàn Figure 03 trong nhà máy sản xuất ô tô.
+* **Tesla Optimus:** Cải tạo dây chuyền Fremont sang sản xuất thí điểm Optimus và huấn luyện qua chương trình nội bộ "Optimus Academy".
+
+> 💡 **Bài viết chuyên sâu liên quan**: Phân tích chi tiết sự kiện IPO, thông số động lực học của Superman và cuộc chiến giữa Unitree, Figure và Tesla:
 > 👉 Xem bài: **[Cú Bứt phá của Unitree Robotics: Từ Cơn sốt IPO đến Robot 'Superman'](/deep-dives/unitree-humanoid-ipo-and-superman)**
 
 ---
 
-## 4. Thể Chế, Pháp Lý & Hạ Tầng Điện Toán
+## 4. Decision Models (System 1): Trả Tự Do Khỏi "JSON Streaming Tax"
+
+Vào giữa tháng 9/2026, sự kiện **TypeSafe công bố Jev System 1** cùng bộ mô hình mã nguồn mở **Laya (`laya-multilingual`, `laya-typed-decisions`)** đã giải quyết một trong những nút thắt lớn nhất của kỹ nghệ phần mềm Agentic: **Nghịch lý dùng Generative LLM để làm bộ điều hướng quyết định**.
+
+```
+[Thực trạng lãng phí: "JSON Streaming Tax"]
+User State ──> [ Mở SSE Stream ──> Chờ 2 - 5s ──> Tốn $0.015 ──> Dễ vỡ Schema JSON ]
+
+[Kiến trúc mới: Typed Decision Model (System 1)]
+User State ──> [ Jev / Laya: 1 Forward Pass ──> 30ms ──> $0 ──> Vector Xác suất Chuẩn tắc ]
+```
+
+### 4 Mẫu hình tích hợp System 1 $\times$ System 2 trong Agent
+1. **Dynamic Tool Pre-Filtering:** Thay vì nhồi 50+ tool schemas vào context làm tốn 4.000 token và khiến LLM ảo giác, System 1 (<30ms) lọc lấy đúng 2 tools cần thiết trước khi gọi LLM.
+2. **Conditional Escalation Ladder:** Độ tự tin $\ge 0.85$ ➔ Thực thi API trực tiếp (30ms, $0 token); Độ tự tin $< 0.85$ ➔ Leo thang lên LLM System 2 (o1, Claude Opus).
+3. **Real-time Output Guardrails:** Kiểm soát an toàn đầu ra với độ trễ 30ms trước khi gói tin được gửi tới client.
+4. **Sub-Agent Dispatcher:** Điều phối và chia nhánh công việc siêu tốc cho các agent con.
+
+> 💡 **Bài viết chuyên sâu liên quan**: Khám phá chi tiết cơ chế toán học RLCD, hàm mất mát Brier và cách thiết lập Typed Decision Contract:
+> 👉 Xem bài: **[Kỷ Nguyên Decision Model (System 1): Trả Tự Do Khỏi 'JSON Streaming Tax' Của LLM](/deep-dives/system-1-decision-models-jev-laya)**
+
+---
+
+## 5. Thể Chế, Pháp Lý & Hạ Tầng Điện Toán
 
 ### Cột mốc Lịch sử: EU AI Act Có Hiệu Lực Thi Hành (02/08/2026)
 Sau 24 tháng kể từ ngày ban hành (01/08/2024), ngày 02/08/2026 đánh dấu thời điểm **Điều 50 (Nghĩa vụ Minh bạch)** bắt đầu có hiệu lực pháp lý bắt buộc:
@@ -102,7 +137,7 @@ Sau 24 tháng kể từ ngày ban hành (01/08/2024), ngày 02/08/2026 đánh d�
 
 ---
 
-## 5. Xu Hướng Nghiên Cứu Học Thuật Cốt Lõi (ArXiv)
+## 6. Xu Hướng Nghiên Cứu Học Thuật Cốt Lõi (ArXiv)
 
 Trọng tâm nghiên cứu học thuật trong tháng 8 và 9/2026 xoay quanh việc giải phóng bài toán nghẽn tài nguyên khi mô hình "suy nghĩ quá dài".
 
@@ -127,8 +162,9 @@ Input Prefix ──> [Cắt tỉa Token cũ] ──> [Sliding Window 4096 gần 
 ## 🧭 Tổng Kết & Định Hướng Tuần Tiếp Theo
 
 Quý 3/2026 chứng minh rằng cuộc chơi AI đã bước qua giai đoạn thử nghiệm ngây thơ. Thành bại của các hệ thống AI hiện nay phụ thuộc vào:
-1. **Khả năng kiểm soát chi phí suy luận (Inference Unit Economics):** Ai tối ưu được Test-Time Compute và nén KV cache tốt hơn sẽ thắng thế trên quy mô thương mại.
-2. **Khả năng tự hành dài hạn (Long-horizon Computer-Use):** Năng lực giải quyết các bài toán kỹ nghệ kéo dài hàng giờ không bị lạc hướng.
-3. **Tuân thủ pháp lý chủ động:** Các giải pháp nhúng watermark và kiểm soát an toàn trở thành điều kiện tiên quyết để tồn tại tại thị trường Âu - Mỹ.
+1. **Kiến trúc đa làn đua (The 3 AI Lanes):** Tận dụng Rules (<1ms) cho ràng buộc tĩnh, Decision Models System 1 (30ms) cho định tuyến và tiền lọc, và Generative Reasoners System 2 cho sáng tạo và suy ngẫm sâu.
+2. **Khả năng kiểm soát chi phí suy luận (Inference Unit Economics):** Ai tối ưu được Test-Time Compute và nén KV cache tốt hơn sẽ thắng thế trên quy mô thương mại.
+3. **Phân tầng Robot Learning (Embodied Stack):** Kết hợp VLM ngữ nghĩa, mô phỏng 3D tổng hợp và bộ điều khiển xúc giác tuân thủ vi mô thay vì bám víu vào mô hình nguyên khối.
+4. **Tuân thủ pháp lý chủ động:** Các giải pháp nhúng watermark và kiểm soát an toàn trở thành điều kiện tiên quyết để tồn tại tại thị trường Âu - Mỹ.
 
 *Báo cáo hàng tuần tiếp theo (Tuần 41/2026) sẽ cập nhật các đo lường benchmark độc lập đầu tiên của Gemini 4 Argon và phản hồi triển khai Figure 03 tại các nhà máy ô tô.*

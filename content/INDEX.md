@@ -10,11 +10,13 @@ Báo cáo chu kỳ lớn (2 tháng, quý, năm) cung cấp góc nhìn vĩ mô v�
 
 * **[2026-08-09] Toàn cảnh AI Tháng 8 – Cuối tháng 9/2026** (`content/overviews/2026-08-09-two-months.mdx`)
   * *Khoảng thời gian*: 01/08/2026 – 30/09/2026
-  * *Trọng tâm*: Khởi động thế hệ GPT-6 & Gemini 4 Argon (1M output token), làn sóng mã nguồn mở DeepSeek-V4 & Qwen 3.8, Unitree IPO bùng nổ, EU AI Act Điều 50 có hiệu lực.
+  * *Trọng tâm*: Khởi động thế hệ GPT-6 & Gemini 4 Argon (1M output token), làn sóng mã nguồn mở DeepSeek-V4 & Qwen 3.8, bước ngoặt CoRL 2026 phá vỡ Monolithic VLA, Decision Models (System 1) xóa bỏ JSON Streaming Tax, Unitree IPO bùng nổ, EU AI Act Điều 50 có hiệu lực.
   * *Các bài Deep-Dive liên kết*:
     1. `prefix-sliding-test-time-compute`
     2. `deepseek-v4-engram-memory`
     3. `unitree-humanoid-ipo-and-superman`
+    4. `corl-2026-robot-learning-agentic-stack`
+    5. `system-1-decision-models-jev-laya`
 
 ---
 
@@ -33,6 +35,8 @@ Các bài viết mổ xẻ kiến trúc, giải thích trực quan, có liên k�
 
 | ID Chủ đề | Tiêu đề Chuyên đề | Thuộc Báo cáo Gốc | Lĩnh vực |
 | :--- | :--- | :--- | :--- |
+| `corl-2026-robot-learning-agentic-stack` | **Toàn cảnh CoRL 2026: Phá Vỡ Monolithic VLA & Kiến Trúc Robot Đa Tầng** | `overview-2026-08-09` | Robotics |
+| `system-1-decision-models-jev-laya` | **Kỷ Nguyên Decision Model (System 1): Trả Tự Do Khỏi 'JSON Streaming Tax'** | `overview-2026-08-09` | Systems / Agentic |
 | `prefix-sliding-test-time-compute` | **Giải mã 'Prefix Sliding': Bước nhảy $3\times$ Tốc độ Suy luận trong TTC** | `overview-2026-08-09` | ArXiv Research |
 | `deepseek-v4-engram-memory` | **Bên trong DeepSeek-V4.1: Cơ chế Engram Memory & Nén KV-Cache** | `overview-2026-08-09` | Open Weights |
 | `unitree-humanoid-ipo-and-superman` | **Cú bứt phá Unitree Robotics: Từ IPO STAR Market đến Robot 'Superman'** | `overview-2026-08-09` | Robotics |
