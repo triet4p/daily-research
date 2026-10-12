@@ -45,6 +45,14 @@ Hậu quả:
 2. **Nghẽn băng thông bộ nhớ (Memory Bandwidth Bound):** Tốc độ sinh token (tokens/second) tụt dốc thảm hại khi chuỗi suy nghĩ kéo dài.
 
 ---
+## 🖼 Trực Quan Hóa Bộ Nhớ: Full Attention vs Prefix Sliding
+
+![Trực quan hóa cấu trúc bộ nhớ KV Cache Prefix Sliding](/images/deep-dives/prefix-sliding-kv-cache-architecture.webp)
+
+> 💡 **Giải thích sơ đồ kỹ thuật trên:**
+> * **Phía trên (Linear Memory Inflation):** Trong cơ chế Full Attention thông thường, mỗi token suy nghĩ (`<thought>`) sinh ra liên tục nạp vào KV-cache khiến bộ nhớ phình to tuyến tính $O(N)$. Đến token thứ 4.000+, dung lượng VRAM bị quá tải (Out-Of-Memory / OOM), tốc độ tính toán ma trận Attention tụt giảm mạnh.
+> * **Phía dưới (Stanford Prefix Sliding):** Phân vùng bộ nhớ thông minh: **Pinned Prefix** (System Prompt, Tools) được khóa cố định bên trái; các token tư duy trung gian cũ bị loại bỏ (evicted) giải phóng VRAM; chỉ duy trì **Sliding Window 4.096 token** mới nhất bên phải. Kết quả: Tốc độ giải mã tăng vọt **$3\times$** mà không mất độ chính xác!
+
 
 ## 🚀 Giải Pháp Stanford: Prefix Sliding (arXiv:2608.26070)
 

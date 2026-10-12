@@ -1,146 +1,167 @@
 ---
 id: "system-1-decision-models-jev-laya"
 slug: "system-1-decision-models-jev-laya"
-title: "Kỷ Nguyên Decision Model (System 1): Trả Tự Do Khỏi 'JSON Streaming Tax' Của LLM"
-subtitle: "Tại sao phần mềm không cần LLM làm thơ chỉ để lấy một enum, và cách TypeSafe Jev & Laya tái sinh mô hình quyết định siêu tốc 30ms"
+title: "Tương Lai AI Không Phải Là Trò Chuyện: 5 Sự Thật Về Decision Models (System 1)"
+subtitle: "Giải mã cuộc cách mạng xóa bỏ 'JSON Streaming Tax', thuật toán RLCD, 3 primitives Choice/Score/Noul và tấm phanh khẩn cấp cho AI Agent"
 published_at: "2026-10-12"
-reading_time: "14 phút"
+reading_time: "16 phút"
 author: "AI Research Intelligence Lab"
 sector: "research"
-tags: ["System 1", "Decision Models", "Jev", "Laya", "RLCD", "Agentic Systems", "Calibration"]
+tags: ["System 1", "Decision Models", "Jev", "Clef", "Laya", "RLCD", "Agentic Systems", "Calibration", "OWASP LLM06"]
 parent_overview_id: "overview-2026-08-09"
 parent_overview_slug: "2026-08-09-two-months"
 parent_overview_title: "Báo cáo Toàn cảnh AI: Tháng 8 – Cuối tháng 9/2026"
-summary: "Phân tích làn sóng Decision Model (System 1) bùng nổ giữa tháng 9/2026 với TypeSafe Jev và Laya. Giải thích 'JSON Streaming Tax', huấn luyện RLCD với Proper Scoring Rules, và 4 mẫu hình tích hợp System 1 x System 2 trong kiến trúc Agent."
+summary: "Phân tích toàn diện về làn sóng Decision Model (System 1) kích hoạt ngày 15/09/2026: Cơ chế Single Forward-Pass với token đầu ra $0, thuật toán RLCD chuẩn hóa xác suất như dự báo thời tiết, cuộc nổ tung sinh thái mã nguồn mở (Clef, Strands, CLM, Laya-mlx), cái bẫy Type-Safe và tấm phanh an toàn EDR cho Agent."
 ---
 
-# Kỷ Nguyên Decision Model (System 1): Trả Tự Do Khỏi "JSON Streaming Tax" Của LLM
+# Tương Lai AI Không Phải Là Trò Chuyện: 5 Sự Thật Ngỡ Ngàng Về Decision Models
 
-> 🔗 **Thuộc chuỗi báo cáo**: Bài viết này phân tích chuyên sâu cho Phần 1 & Phần 5 trong **[Báo cáo Toàn cảnh AI: Tháng 8 – Cuối tháng 9/2026](/overview/2026-08-09-two-months)**.  
+> 🔗 **Thuộc chuỗi báo cáo**: Bài viết này phân tích chuyên sâu cho Phần 4 trong **[Báo cáo Toàn cảnh AI: Tháng 8 – Cuối tháng 9/2026](/overview/2026-08-09-two-months)**.  
 > 👉 [Quay lại Báo cáo Toàn cảnh](/overview/2026-08-09-two-months)
 
 ---
 
-## 😫 Nỗi Đau Sản Xuất: "The JSON Streaming Tax"
+Các mô hình ngôn ngữ lớn (LLM) thế hệ mới như GPT-6 hay Claude Opus rất thông minh: chúng có thể viết luận, làm thơ và phân tích chiến lược phức tạp. Nhưng khi bước vào hạ tầng phần mềm thực tế, một nghịch lý lớn xuất hiện: **LLM quá chậm, quá đắt đỏ và quá "thích nói nhiều"**.
 
-Trong kiến trúc Agent những năm qua, hầu hết các hệ thống kỹ thuật đều mắc phải một sai lầm tốn kém: **sử dụng một mô hình ngôn ngữ tự hồi quy (Autoregressive Generative LLM) khổng lồ chỉ để đưa ra một quyết định phân nhánh phần mềm**.
+Khi hệ thống tự động hóa của bạn chỉ cần xác định một giao dịch có phải gian lận hay không, hoặc một cảnh báo có cần chuyển cho nhóm SOC xử lý hay không, việc bắt một mô hình hàng trăm tỷ tham số "suy nghĩ" rồi sinh ra hàng loạt câu văn hoa mỹ là sự lãng phí chi phí tính toán biên (*marginal compute cost*) khủng khiếp.
 
-Hãy nhìn vào luồng thực tế của một kỹ sư backend:
-1. Bạn có một người dùng gửi yêu cầu: *"Tôi muốn đổi vé máy bay bay ngày mai"*.
-2. Bạn muốn hệ thống quyết định gọi API nào trong 3 hàm: `flight_change`, `refund`, hay `faq_help`.
-3. Bạn mở kết nối Server-Sent Events (SSE), gọi GPT-4 hoặc Claude qua API.
-4. Bạn ngồi chờ **2 đến 5 giây** để LLM sinh từng token text.
-5. Bạn trả **$0.015 – $0.03** cho hàng nghìn token ngữ cảnh.
-6. Khi nhận JSON về, thư viện Pydantic / Zod ném ra lỗi `500 Internal Error` vì LLM vô tình chèn thêm dấu ngoặc kép hoặc markdown ```json ```!
-
-```
-[Thực tế lãng phí khi dùng LLM làm bộ định tuyến quyết định]
-State In ──> [ LLM 70B Tokens Generating... 2 - 5s ] ──> String: "```json { "action": "refund" }```"
-                     ▲                                                    │
-             Độ trễ cao, tốn tiền                                    Pydantic Parse Error!
-```
-
-Đây chính là **"JSON Streaming Tax"** — cái giá đắt đỏ mà các kỹ sư phần mềm phải trả khi ép một "nhà văn làm thơ" (Generative Reasoner) đi làm công việc của một "bàn chuyển mạch đường ray" (Deterministic Switchboard).
+Dựa trên lý thuyết nhận thức của Daniel Kahneman, nếu LLM truyền thống đóng vai trò là **"System 2"** (tư duy chậm, giải mã tự hồi quy tốn kém từng token một), thì **Decision Model** chính là **"System 1"** (tư duy nhanh, nhận diện mẫu và đưa ra quyết định tức thì).
 
 ---
 
-## ⚡ Sự Trỗi Dậy Của System 1: TypeSafe Jev & Laya (15/09/2026)
+## 🖼 Sơ Đồ Kiến Trúc: System 1 (Decision Model) vs System 2 (Generative LLM)
 
-Vào giữa tháng 9/2026, thị trường ghi nhận sự ra mắt mang tính bước ngoặt của **TypeSafe Jev System 1**, đi kèm với bộ mô hình mã nguồn mở **Laya (`laya-multilingual`, `laya-typed-decisions`)**:
+![Kiến trúc so sánh System 1 Decision Model và System 2 Generative LLM](/images/deep-dives/system-1-decision-models-architecture.webp)
 
-> **"Phần mềm không cần những đoạn văn giải thích dài dòng. Phần mềm chỉ cần Typed Decision Contract: State In → Calibrated Probabilities Out."**
+> 💡 **Giải thích sơ đồ kiến trúc trên:**
+> * **Nửa bên trái (System 1 - Jev / Clef / Laya):** Vận hành theo nguyên lý **Single Parallel Forward Pass**. Dữ liệu ngữ cảnh đi qua mạng neural một lượt duy nhất $O(1)$, không lặp lại giải mã. Đầu ra chiếu thẳng lên không gian xác suất (*Probability Simplex $\Delta^K$*) qua 3 primitive có kiểu dữ liệu chặt chẽ (`Choice`, `Score`, `Noul`). Chi phí token đầu ra là **0 USD (hoàn toàn miễn phí)** với độ trễ phản xạ chỉ **30–50ms**.
+> * **Nửa bên phải (System 2 - Generative LLM):** Vận hành theo vòng lặp tự hồi quy (**Autoregressive Decode Loop**). Mỗi token sinh ra phải chờ token trước đó, tốn hàng trăm chu kỳ tính toán, thời gian chờ kéo dài **2–5 giây**, chi phí đắt đỏ và chuỗi JSON đầu ra dễ gãy vỡ vì lỗi cú pháp markdown.
 
-### Sự khác biệt bản chất: Sinh văn bản vs Phân phối xác suất
+---
 
-| Tiêu chí | Generative LLM (System 2) | Decision Model (System 1 - Jev / Laya) |
+## 1. Không Biết Chat Nhưng Ra Quyết Định Chớp Mắt — Token Đầu Ra Hoàn Toàn Miễn Phí
+
+Khác biệt cốt lõi giữa LLM truyền thống và Decision Model nằm ở kiến trúc tính toán ở thời điểm suy luận (inference):
+* **LLM truyền thống:** Sinh từng token tự hồi quy (*autoregressive*). Mỗi từ được tạo ra phải chờ từ phía trước, đòi hỏi hàng trăm đến hàng ngàn vòng lặp giải mã (*decode loops*) nối tiếp nhau.
+* **Decision Model:** Loại bỏ hoàn toàn vòng lặp giải mã tự do. Mô hình tiếp nhận ngữ cảnh (văn bản hoặc JSON) cùng sơ đồ câu hỏi định kiểu (*schema*), sau đó chạy **một lượt lan truyền tiến song song duy nhất (single parallel forward pass)** để tính toán trực tiếp phân bố xác suất trên các lựa chọn có sẵn.
+
+### 3 Nguyên Mẫu Quyết Định (Decision Primitives) Cốt Lõi
+Để phục vụ mọi bài toán phần mềm, Decision Model vận hành dựa trên 3 primitive:
+1. **Choice (Lựa chọn đơn):** Phân loại ngữ cảnh vào 1 nhãn trong tối đa **255 lựa chọn rời rạc**, trả về nhãn tối ưu kèm theo toàn bộ vector xác suất đã hiệu chỉnh.
+2. **Score (Đánh giá thứ tự):** Chấm điểm ngữ cảnh trên thang đo thứ tự (tối đa 10 cấp độ), trả về điểm trung bình có trọng số.
+3. **Noul (Xác suất nhị phân):** Đánh giá mệnh đề đúng/sai dưới dạng xác suất thực $P(\text{True} \mid S) \in [0.0, 1.0]$. Noul không cần trường độ tin cậy riêng, bởi vì bản thân giá trị xác suất $p \approx 0.5$ đã thể hiện mức độ mơ hồ tối đa của dữ liệu.
+
+```
+"Unstructured state in, typed probabilistic decisions out."
+(Đầu vào là ngữ cảnh phi cấu trúc, đầu ra là quyết định xác suất có kiểu dữ liệu rõ ràng.)
+```
+
+### Kinh Tế Học Điện Toán Thực Nghiệm
+* **Tốc độ:** Thời gian phản hồi lý thuyết từ 70ms đến 500ms (nhanh hơn tới **$193\times$** so với Claude Sonnet 5 trên tác vụ phân loại). Kiểm thử hạ tầng thực tế từ Cloudflare ghi nhận độ trễ trung bình P50 là **524ms**, còn qua thử nghiệm của Nexus Agent tại Châu Âu là **680ms** — vẫn vượt trội hoàn toàn so với hàng giây giải mã của LLM.
+* **Chi phí:** Giá token đầu vào chỉ **$0.042 / triệu token**, trong khi **token đầu ra là $0 (MIỄN PHÍ HOÀN TOÀN)** vì mô hình không tốn chi phí tính toán sinh văn bản tự hồi quy!
+
+---
+
+## 2. Thuật Toán RLCD: AI Không Cần Đúng 100%, Nó Cần "Thành Thật" Với Độ Tin Cậy
+
+Giá trị cốt lõi của một Decision Model không nằm ở việc luôn đúng tuyệt đối, mà nằm ở **Độ hiệu chỉnh xác suất (Probability Calibration)**.
+
+Hãy tưởng tượng một chuyên gia dự báo thời tiết: Nếu người đó báo *"70% cơ hội mưa"* trong 100 ngày khác nhau, thì thực tế đúng 70 ngày trong số đó phải có mưa. Đó chính là sự thành thật về mặt thống kê.
+
+### Tại Sao Các Phương Pháp Cũ Thất Bại?
+* **RLHF (Học tăng cường từ phản hồi người):** Tối ưu hóa cảm quan của người chấm, khiến AI "nói dối lưu loát" để vừa lòng người dùng, tạo ra hiện tượng **ảo tưởng độ tin cậy** (tự tin khẳng định 99% ngay cả khi đoán sai).
+* **RLVR (Học tăng cường với phần thưởng xác minh nhị phân 1/0):** Ép logits tiến tới vô cùng ($\to \infty$), đẩy xác suất về các cực đoan (0.999 hoặc 0.001), bóp méo hoàn toàn giá trị thống kê.
+
+### Cơ Chế Phạt Cược Của RLCD (Reinforcement Learning for Calibrated Decisions)
+RLCD sử dụng các **Strictly Proper Scoring Rules** (như Brier Score Loss và Log Loss) kết hợp phạt ECE (Expected Calibration Error) theo mini-batch:
+
+$$\text{Brier Loss} = \frac{1}{N} \sum_{i=1}^N \sum_{k=1}^K (p_{ik} - y_{ik})^2$$
+
+Cơ chế thưởng phạt mô phỏng bàn cược xác suất:
+* **Đoán đúng + Cược cao ($p = 0.95$):** Thưởng tối đa (+10 điểm).
+* **Đoán đúng + Cược thấp ($p = 0.60$):** Thưởng nhẹ (+3 điểm).
+* **Đoán sai + Cược thấp ($p = 0.60$):** Phạt nhẹ (-2 điểm).
+* **Đoán sai + Cược cao ($p = 0.95$):** **PHẠT CỰC NẶNG (-100 điểm)** để triệt tiêu hành vi tự tin thái quá!
+
+Nhờ RLCD, con số xác suất do Decision Model trả về phản ánh chính xác tần suất xuất hiện kết quả đúng trong thực tế.
+
+---
+
+## 3. Cuộc Nổ Tung Sinh Thái Trong 3 Tuần (Từ 15/09/2026)
+
+Cột mốc kích hoạt diễn ra ngày 15/09/2026 khi TypeSafe AI công bố Jev. Chỉ trong chưa đầy 3 tuần, hệ sinh thái đã nổ tung với hàng loạt biến thể từ các tập đoàn công nghệ lẫn cộng đồng mã nguồn mở:
+
+| Mô hình & Đơn vị phát hành | Quy mô & Giấy phép | Đặc điểm kỹ thuật & Độ trễ cốt lõi |
 | :--- | :--- | :--- |
-| **Cơ chế hoạt động** | Tự hồi quy sinh từng token (Autoregressive $O(N)$) | **Một pass tính toán duy nhất (Single Forward-Pass $O(1)$)** |
-| **Thời gian phản hồi** | 2.000 – 5.000 ms | **20 – 35 ms** (Nhanh gấp $\sim 100\times$) |
-| **Chi phí mỗi request** | $0.01 – $0.05 | **Gần như bằng 0** (Chạy trên CPU hoặc GPU nhỏ) |
-| **Đầu ra (Output)** | Chuỗi văn bản tự do (Dễ vỡ schema) | **Vector xác suất đã hiệu chuẩn** trên simplex $\Delta^K$ |
-| **Rủi ro ảo giác** | Luôn tiềm ẩn | **Không có ảo giác sinh văn bản** |
+| **Jev** *(TypeSafe AI)* | API Đóng | Tiên phong System One; độ trễ 70–500ms (P50 thực tế ~524ms); huấn luyện RLCD chuẩn xác. |
+| **Clef / Clef-flash** *(Cloudflare)* | 9.7B / 27B<br>**Apache 2.0** | Tương thích 100% API Jev; **Clef-flash đạt độ trễ siêu tốc 39ms**, Clef đạt 210ms trên Workers AI. |
+| **Strands Decider 2B** *(AWS)* | 2B Params<br>Open Source | Mô hình siêu nhẹ; độ trễ P50 **106ms** trên card GPU cá nhân RTX 3090. |
+| **CLM-8B** *(Stanford & NVIDIA)* | 8B Params<br>Open Weights | Dùng kiến trúc Học tương phản (*Contrastive Learning*) so sánh vector state-action, **nhanh hơn Jev tới 9 lần**. |
+| **Perplexity Decider** *(Perplexity)* | 27B Params<br>API + Weights | Dẫn đầu bảng xếp hạng Decision Index 0.3 (**62.8 điểm**); giá API chỉ $0.04/M input. |
+| **Laya-mlx** *(Cộng đồng Mở)* | < 1GB RAM<br>Apache 2.0 | Bản port MLX cho Apple Silicon; **phản hồi 7–14ms trên máy Mac cá nhân**. |
+| **Quyet-1.0-Large** *(Cộng đồng Mở)* | 33B Params<br>Open Weights | Dẫn đầu về lý luận phức tạp (47.8 điểm Knowledge); độ tương quan hiệu chỉnh xác suất đạt **92.2%**. |
 
 ---
 
-## 🎯 Bản Chất Tin Cậy: Bẫy "Raw Softmax" & Huấn Luyện RLCD
+## 4. Cái Bẫy "Type-Safe": Đúng Kiểu Dữ Liệu KHÔNG ĐỒNG NGHĨA Với Đúng Thực Tế!
 
-Tại sao không dùng một bộ phân loại (Classifier) thông thường như BERT hay RoBERTa?
-Vì softmax thô (Raw Softmax) của các mạng neural thông thường mắc phải **The Confidence Trap (Bẫy Tự Tin Thái Quá)**: Một mô hình có thể xuất ra xác suất $99.9\%$ cho một dự đoán hoàn toàn sai lầm khi gặp dữ liệu lạ ngoài phân phối (Out-Of-Distribution).
+Nhiều quảng cáo khẳng định Decision Model *"không bao giờ ảo tưởng (never hallucinates)"*. Đây là một cạm bẫy tiếp thị mà các kỹ sư hạ tầng cần nhìn nhận tỉnh táo:
 
-### RLCD: Reinforcement Learning for Calibrated Decisions
-Jev và Laya giải quyết bài toán này bằng kỹ thuật **RLCD**, huấn luyện mô hình dựa trên **Strictly Proper Scoring Rules** (Quy tắc tính điểm chuẩn tắc như hàm mất mát Brier):
+* **Tính chất Type-Safe (An toàn kiểu dữ liệu):** Đảm bảo đầu ra luôn tuân thủ 100% định dạng schema khai báo (Choice, Score, Noul). Mô hình không bao giờ bị lỗi cú pháp hay trả về chuỗi JSON hỏng.
+* **Sai số Ngữ nghĩa (Semantic Error):** Đúng kiểu dữ liệu không có nghĩa là nhãn dự đoán đúng với thực tế khách quan! Mô hình vẫn có thể chọn nhầm nhãn.
 
-$$\text{Brier Score} = \frac{1}{N} \sum_{i=1}^N \sum_{k=1}^K (p_{ik} - y_{ik})^2$$
+### Kết Quả Kiểm Thử Thực Tế Từ Nexus Agent (36.218 Lượt Gọi)
+* **Tỷ lệ lỗi khi ra quyết định:** Jev chỉ sai **1.8%** trên các trường hợp nó đưa ra lựa chọn.
+* **Kinh tế học:** Chi phí xử lý của Jev siêu rẻ — chỉ **$0.00008 / quyết định**, rẻ hơn **$222\times$** so với Claude Sonnet 5 ($0.0178) và vượt xa Claude Haiku 4.5 ($0.0065).
+* **Giới hạn tự tin:** Jev chỉ đủ tự tin xử lý **58%** tổng số trường hợp. **42% còn lại** (nơi độ tin cậy rớt xuống thấp) bắt buộc phải chuyển giao cho hệ thống dự phòng (fallback) hoặc con người!
 
-* **Cơ chế phạt bậc hai (Quadratic Penalty):** Nếu mô hình đoán xác suất $99\%$ mà thực tế bị sai, nó sẽ bị phạt cực kỳ nặng nề về điểm thưởng.
-* **Độ tin cậy được hiệu chuẩn (Calibrated Confidence):** Khi mô hình nói xác suất là $80\%$, thì chính xác trong 100 lần nó đưa ra dự đoán này, có 80 lần nó đúng và 20 lần nó sai.
-* Nhờ đó, kỹ sư phần mềm có thể **viết logic nghiệp vụ dựa trên ngưỡng tự tin thực sự** mà không sợ rủi ro bất ngờ.
-
----
-
-## 🧩 4 Mẫu Hình Tích Hợp System 1 $\times$ System 2 Trong Agent
-
-Các hệ thống Agent hiện đại cuối năm 2026 không loại bỏ LLM, mà phối hợp nhịp nhàng giữa **System 1 (Phản xạ siêu tốc)** và **System 2 (Suy ngẫm chuyên sâu)**:
-
-```
-                                  [ Yêu cầu từ Người Dùng ]
-                                              │
-                                              ▼
-                             ┌─────────────────────────────────┐
-                             │    SYSTEM 1 (Jev / Laya)        │
-                             │ • Độ trễ: 30ms | Chi phí: $0    │
-                             │ • Định tuyến ý định & Công cụ   │
-                             └────────────────┬────────────────┘
-                                              │
-                      ┌───────────────────────┴───────────────────────┐
-         Độ tự tin CAO (≥ 0.85)                           Độ tự tin THẤP (< 0.85)
-                      │                                               │
-                      ▼                                               ▼
-         ┌─────────────────────────┐                     ┌─────────────────────────┐
-         │ THỰC THI API TRỰC TIẾP  │                     │ LEO THANG LÊN SYSTEM 2  │
-         │ Không cần gọi LLM!      │                     │ Gọi o1 / Claude Sonnet  │
-         │ Tốc độ < 50ms, $0 token │                     │ để suy luận đa bước     │
-         └─────────────────────────┘                     └─────────────────────────┘
-```
-
-### 1. Dynamic Tool Pre-Filtering (Giải quyết nút thắt 50 công cụ)
-* **Vấn đề:** Khi agent có 50+ công cụ, nhồi toàn bộ JSON schema vào context của LLM sẽ đốt mất 4.000+ token mỗi lượt và làm LLM bị "ngáo" (chọn nhầm công cụ).
-* **Giải pháp:** Cho System 1 (<30ms) quét ý định người dùng trước, lọc lấy đúng 2 công cụ cần thiết nhất rồi mới nạp vào prompt cho LLM.
-
-### 2. Conditional Escalation Ladder (Bậc thang leo thang có điều kiện)
-* Với các tác vụ rõ ràng (chiếm 70–80% khối lượng giao dịch), System 1 đạt độ tự tin $\ge 0.85$ và tự động thực thi thẳng lệnh API mà không cần đánh thức LLM.
-* Chỉ 20% các trường hợp mơ hồ hoặc tranh chấp mới leo thang (escalate) đến Frontier LLM đắt tiền.
-
-### 3. Real-Time Output Guardrail (Cổng kiểm soát an toàn microsecond)
-* System 1 đóng vai trò như bộ phanh khẩn cấp, quét token đầu ra với độ trễ 30ms để phát hiện vi phạm bản quyền hoặc rò rỉ dữ liệu cá nhân trước khi gói tin được gửi tới client.
-
-### 4. Sub-Agent Dispatcher (Bộ điều phối nhánh công việc tự hành)
-* Trong các hệ thống multi-agent, System 1 phân loại và chia việc cho các chuyên viên agent độc lập chỉ trong nháy mắt.
+> 🛡 *"Mô hình ước tính. Hệ thống an ninh cưỡng chế."* (Plexicus: Decision Model cung cấp tín hiệu xác suất trung thực, còn chính sách nghiệp vụ mới là nơi quyết định thi hành.)
 
 ---
 
-## 🏁 Tương Lai Đa Làn Đua (The 3 AI Lanes)
+## 5. Tấm Phanh Khẩn Cấp Cho AI Agent — Ứng Dụng Đang Thay Đổi An Ninh Mạng
 
-Hạ tầng phần mềm thông minh cuối năm 2026 đã phân định rõ ràng 3 làn đua riêng biệt:
+Sự bùng nổ của các AI Agent tự hành mang lại rủi ro an ninh mạng nghiêm trọng: Agent thực thi lệnh phá hoại, vượt quyền hoặc truy cập dữ liệu trái phép (hiểm họa **Excessive Agency - OWASP LLM06**).
+
+Thay vì bắt chính LLM tự kiểm tra bản thân (vừa chậm vừa dễ bị jailbreak), giải pháp hiện đại là đặt một **Decision Model đứng ngoài làm lớp EDR / Guardrail bảo vệ**:
 
 ```
-┌────────────────────────────────────────────────────────────────────────┐
-│ LÀN 1: Rules & Code Heuristics (< 1 ms | $0 | Hoàn toàn xác định)      │
-│ • Regex, if/else, kiểm tra schema cho các ràng buộc tĩnh đã biết.      │
-├────────────────────────────────────────────────────────────────────────┤
-│ LÀN 2: Decision Models - System 1 (~30 ms | Chi phí ~0 | Calibrated)   │
-│ • Jev, Laya: Phân nhánh xác suất, tiền lọc công cụ, định tuyến agent.  │
-├────────────────────────────────────────────────────────────────────────┤
-│ LÀN 3: Generative Reasoners - System 2 (Vài giây | $$ | Sâu sắc)       │
-│ • GPT-6, Claude Opus, DeepSeek-R1: Tổng hợp ý tưởng và suy luận phức tạp│
-└────────────────────────────────────────────────────────────────────────┘
+[Hành động đề xuất từ Agent] 
+             │
+             ▼
+    ┌─────────────────────────────────┐
+    │  DECISION MODEL GUARDRAIL (30ms)│
+    │  Đánh giá rủi ro an ninh mạng   │
+    └────────────────┬────────────────┘
+                     │
+    ┌────────────────┼────────────────┐
+    │ p ≥ 0.90       │ 0.60 ≤ p < 0.90│ p < 0.60
+    ▼                ▼                ▼
+[ VÙNG XANH ]    [ VÙNG VÀNG ]    [ VÙNG ĐỎ ]
+Tự động thi hành Thẩm định qua    Chặn đứng, leo thang
+ngay lập tức     SLM / Rules      lên Con người / Opus
+(Cắt giảm 63x chi phí so với việc gọi LLM làm quan tòa ở mọi bước!)
 ```
 
-> 💡 **Nguyên lý vàng cho kỹ sư AI:**  
-> *"Luôn sử dụng primitive rẻ nhất và nhanh nhất có thể giải quyết được bài toán ra quyết định. Đừng dùng đại bác LLM để bắn một con muỗi phân nhánh logic."*
+### Mô Hình Phân Luồng 3 Vùng (Automation Triage Pattern)
+1. **Vùng tự tin cao ($p \ge 0.90$ - Straight-Through Processing):** Tự động thi hành ngay lập tức. Trên bộ test GSM8K-Verify ở ngân sách lỗi 5%, mô hình RLCD tự động hóa tới **81% tác vụ** (so với chỉ 19% của các mô hình RLVR bị lệch xác suất).
+2. **Vùng trung bình ($0.60 \le p < 0.90$):** Chuyển cho mô hình ngôn ngữ nhỏ (SLM) hoặc quy tắc nghiệp vụ xác minh thêm.
+3. **Vùng không chắc chắn ($p < 0.60$):** Đẩy lên Frontier LLM (Claude Opus / GPT-6) hoặc chuyển cho chuyên gia nhân sự duyệt (Human-in-the-loop).
+
+---
+
+## 🏁 Lời Kết: Câu Hỏi Dành Cho Kiến Trúc Sư Phần Mềm
+
+Tương lai của trí tuệ nhân tạo không chỉ dừng lại ở việc tạo ra những câu văn hoa mỹ hay những cuộc trò chuyện kéo dài (System 2). Tương lai đó nằm ở **hạ tầng ra quyết định chính xác, siêu tốc và tối ưu chi phí (System 1)**.
+
+Bằng cách tách biệt nhiệm vụ *"suy nghĩ sâu"* và *"ra quyết định nhanh"*, kiến trúc hai tầng kết hợp giữa Decision Model và LLM đang trở thành chuẩn mực thiết kế mới cho mọi phần mềm tự động hóa.
+
+Trước khi khép lại bài viết, hãy nhìn lại hệ thống bạn đang vận hành:
+
+> **"Trong kiến trúc của bạn, có bao nhiêu 'câu lệnh IF' đắt đỏ đang ngốn tiền vô ích mỗi ngày chỉ vì bạn đang bắt một LLM khổng lồ phải làm công việc của một nút bấm?"**
 
 ---
 
 > 🔗 **Đọc thêm về các chuyển động công nghệ cùng thời kỳ**:  
-> 👉 **[Báo cáo Toàn cảnh AI: Tháng 8 – Cuối tháng 9/2026](/overview/2026-08-09-two-months)**  
-> 👉 **[Giải mã 'Prefix Sliding': Bước nhảy vọt 3x Tốc độ trong Test-Time Compute](/deep-dives/prefix-sliding-test-time-compute)**
+> 👉 **[Báo cáo Toàn cảnh AI: Tháng 8 – Cuối tháng 9/2026](/overview/2026-08-09-two-months)** (Toàn cảnh GPT-6, Gemini 4, Unitree IPO, EU AI Act)  
+> 👉 **[Toàn cảnh CoRL 2026: Phá Vỡ Monolithic VLA & Kiến Trúc Robot Đa Tầng](/deep-dives/corl-2026-robot-learning-agentic-stack)**

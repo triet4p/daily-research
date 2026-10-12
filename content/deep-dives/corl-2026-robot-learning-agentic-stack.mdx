@@ -44,6 +44,17 @@ Camera + Prompt ──> [ Mạng Neural Khổng Lồ 7B - 70B ] ──> Mô-men 
 
 ---
 
+
+## 🖼 Sơ Đồ Kiến Trúc: Robotic Agentic Learning Stack Tại CoRL 2026
+
+![Sơ đồ kiến trúc Robot Đa Tầng CoRL 2026](/images/deep-dives/corl-2026-agentic-robotics-architecture.webp)
+
+> 💡 **Giải thích sơ đồ kỹ thuật trên:**
+> * **Tầng đỉnh (Macro Semantics ~1 Hz):** VLM Semantic Critic (**TOPReward**) đóng vai trò giám sát tiến độ trừu tượng, phân tích chuỗi video để xác định tỷ lệ thành công của mục tiêu.
+> * **Tầng giữa (Meso Execution 10–50 Hz):** Bộ định tuyến kỹ năng (Skill Router) và kế hoạch quỹ đạo hình học, tích hợp nguồn dữ liệu tổng hợp quy mô lớn từ nhà máy **VLK** (48.000+ quỹ đạo không cần teleop).
+> * **Tầng đáy (Micro Realization 50–100 Hz):** Lớp nền tảng tiếp xúc xúc giác (**DexFLEX**). Nằm tại bàn tay robot khéo léo, lớp này liên tục đo lường và bù trừ lực tuân thủ (tactile compliance), dập tắt hiện tượng trượt vi mô (micro-slips) mà không cần đánh thức các mô hình cấp cao.
+> * **Vòng lặp bên ngoài:** Bộ thử nghiệm phản thực tế (**StressDream**) sử dụng Diffusion World Model để rà soát rủi ro vùng đuôi (tail failures) trong môi trường số trước khi cấp quyền nạp xuống phần cứng thật.
+
 ## 🏗 Kiến Trúc Mới: Robotic Agentic Ecosystem (Đa Tần Số & Phân Tầng)
 
 Tại CoRL 2026, các phòng thí nghiệm hàng đầu đã thống nhất chuyển dịch sang kiến trúc **Robotic Agentic Learning Architecture**: Phân tách trách nhiệm theo thang thời gian (Multi-timescale Stack) và phân cấp ủy quyền (Closed Allocation of Authority).
