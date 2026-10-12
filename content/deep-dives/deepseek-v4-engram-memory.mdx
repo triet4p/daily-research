@@ -1,0 +1,96 @@
+---
+id: "deepseek-v4-engram-memory"
+slug: "deepseek-v4-engram-memory"
+title: "Bên trong DeepSeek-V4.1: Cơ chế Engram Memory & Bí quyết Nén KV-Cache ~890 Bytes"
+subtitle: "Khám phá kiến trúc Causal Encoder-Decoder mới và kỹ thuật lưu trữ dấu vết bộ nhớ dài hạn của DeepSeek"
+published_at: "2026-10-12"
+reading_time: "12 phút"
+author: "AI Research Intelligence Lab"
+sector: "open-weights"
+tags: ["DeepSeek", "Engram Memory", "KV Compression", "MoE Architecture", "Open Weights"]
+parent_overview_id: "overview-2026-08-09"
+parent_overview_slug: "2026-08-09-two-months"
+parent_overview_title: "Báo cáo Toàn cảnh AI: Tháng 8 – Cuối tháng 9/2026"
+summary: "Mổ xẻ kiến trúc DeepSeek-V4.1-Flash phát hành ngày 10/09/2026: Cách Engram memory hoạt động như cơ chế ghi nhớ vỏ não sinh học, bảng so sánh kích thước KV-cache và tiềm năng cho Edge/On-premise."
+---
+
+# Bên Trong DeepSeek-V4.1: Cơ Chế Engram Memory & Bí Quyết Nén KV-Cache ~890 Bytes
+
+> 🔗 **Thuộc chuỗi báo cáo**: Bài viết này phân tích chuyên sâu cho Phần 2 trong **[Báo cáo Toàn cảnh AI: Tháng 8 – Cuối tháng 9/2026](/overview/2026-08-09-two-months)**.  
+> 👉 [Quay lại Báo cáo Toàn cảnh](/overview/2026-08-09-two-months)
+
+---
+
+## 🔬 Bối Cảnh: Bước Ngoặt 10/09/2026 Của DeepSeek
+
+Vào ngày 10 tháng 9 năm 2026, DeepSeek âm thầm cập nhật phiên bản **DeepSeek-V4.1-Flash** trên hệ thống API chính thức. Không chỉ là một đợt làm mới trọng số thông thường, phiên bản này đem đến hai thay đổi mang tính cách mạng trong kiến trúc nội tại:
+
+1. **Chuyển đổi sang Causal Encoder-Decoder:** Tách biệt hoàn toàn luồng đọc hiểu dữ liệu đầu vào (Input Prompt) với luồng sinh dữ liệu đầu ra (Autoregressive Output).
+2. **Cơ chế Engram Memory kết hợp nén KV-Cache:** Đạt mức tiêu thụ bộ nhớ kỷ lục chỉ **~890 bytes trên mỗi token ngữ cảnh** (so với mức 4.000 – 16.000 bytes của các mô hình Transformer truyền thống).
+
+---
+
+## 🧠 Engram Memory Là Gì? (Trực Giác Sinh Học)
+
+Thuật ngữ **Engram** xuất phát từ ngành khoa học thần kinh (neuroscience), dùng để chỉ *dấu vết vật lý hoặc sinh hóa được lưu lại trong mạng lưới tế bào thần kinh sau mỗi trải nghiệm trí nhớ*.
+
+Trong các mô hình Transformer thông thường, "trí nhớ ngắn hạn" của mô hình chính là toàn bộ ma trận KV-Cache. Muốn nhớ một đoạn văn bản 100.000 từ, mô hình phải mang theo toàn bộ các vector biểu diễn của từng từ một.
+
+```
+[Transformer Truyền thống: Nhớ nguyên xi từng từ]
+Token ──> Vector Key (128 dims) + Vector Value (128 dims) ──> Lưu trữ thô vào VRAM
+==> Tốn kém hàng chục Gigabyte cho mỗi session người dùng!
+```
+
+DeepSeek-V4.1 tiếp cận theo cách của bộ não người: **Chỉ lưu lại "dấu vết kích hoạt" (Engram Traces) của các nhóm nơ-ron trọng yếu thay vì lưu trữ vector thô**.
+
+```
+[Kiến trúc DeepSeek-V4.1 Engram Memory]
+Raw Input ──> Causal Encoder (8B active)
+                   │
+                   ▼
+       [Engram Quantizer & Compressor]
+       Nén biểu diễn thành dấu vết kích hoạt siêu gọn (~890 Bytes/token)
+                   │
+                   ▼
+            Dynamic Engram Buffer ──> Causal Decoder (16B active) ──> Output Token
+```
+
+---
+
+## 📉 So Sánh Kích Thước KV-Cache: Con Số Không Biết Nói Dối
+
+Bảng so sánh dung lượng RAM cần thiết để duy trì phiên ngữ cảnh **128.000 tokens** giữa các kiến trúc hàng đầu:
+
+| Mô hình | Cơ chế Attention | Dung lượng KV/token | VRAM cần cho 128K context (1 user) |
+| :--- | :--- | :--- | :--- |
+| **Llama-3.1 70B** | GQA (Grouped-Query) | ~4.096 Bytes | **~524 MB** |
+| **DeepSeek-V3** | MLA (Multi-Head Latent Attention) | ~2.180 Bytes | **~279 MB** |
+| **DeepSeek-V4.1-Flash** | **Engram Memory + Causal Enc-Dec** | **~890 Bytes** | **~114 MB** |
+
+> 🚀 **Hệ quả thực tế:** Một máy chủ gắn 8 card NVIDIA H100 với DeepSeek-V4.1-Flash có thể phục vụ đồng thời **gấp 4.6 lần số lượng phiên người dùng (concurrent sessions)** ngữ cảnh 128K so với kiến trúc GQA thông thường!
+
+---
+
+## ⚡ Kiến Trúc Causal Encoder-Decoder: 8B Vào, 16B Ra
+
+Một điểm độc đáo khác của DeepSeek-V4.1 là cấu trúc bất đối xứng (Asymmetric routing) giữa khâu nạp và khâu sinh:
+* **Giai đoạn Prefill (Đọc Prompt):** Mô hình chỉ kích hoạt **8 tỷ tham số (8B active)**. Khâu này được thiết kế để xử lý tài liệu dài, hình ảnh và code với tốc độ nạp nhanh gấp $2.5\times$.
+* **Giai đoạn Decode (Sinh câu trả lời):** Mô hình kích hoạt **16 tỷ tham số (16B active)** gồm các chuyên gia (experts) chuyên sâu về lập luận và tổng hợp ngôn ngữ, đảm bảo chất lượng câu trả lời cao cấp.
+
+---
+
+## 🛠 Bộ Thư Viện Phần Cứng Cuối Tháng 9/2026: Tách Khỏi NVIDIA
+
+Đáng chú ý, vào ngày 30/09/2026, DeepSeek đã mở mã nguồn bộ ba thư viện:
+* `TileLang-Ascend`: Trình biên dịch ngôn ngữ lập trình kernel cấp thấp cho NPU Huawei Ascend.
+* `DeepGEMM-Ascend`: Thư viện nhân ma trận MoE tối ưu hóa trực tiếp cho chip bán dẫn nội địa Trung Quốc.
+* `TileKernels`: Tập hợp các kernel tùy biến cho cơ chế Engram memory.
+
+Điều này cho thấy mục tiêu chiến lược của DeepSeek: **Đưa toàn bộ mô hình siêu lớn (1.6T params) về vận hành ổn định trên hạ tầng chip nội địa với chi phí bằng một phần nhỏ của phương Tây.**
+
+---
+
+> 🔗 **Đọc thêm về các chuyển động công nghệ cùng thời kỳ**:  
+> 👉 **[Báo cáo Toàn cảnh AI: Tháng 8 – Cuối tháng 9/2026](/overview/2026-08-09-two-months)** (Toàn cảnh GPT-6, Gemini 4, Unitree IPO, EU AI Act)  
+> 👉 **[Giải mã 'Prefix Sliding': Bước nhảy vọt 3x Tốc độ trong Test-Time Compute](/deep-dives/prefix-sliding-test-time-compute)**

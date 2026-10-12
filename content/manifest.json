@@ -1,0 +1,90 @@
+{
+  "system_info": {
+    "title": "Daily AI Research Intelligence",
+    "description": "Kho tri thức nghiên cứu, phân tích và theo dõi bước tiến trí tuệ nhân tạo hàng tuần và định kỳ",
+    "last_updated": "2026-10-12",
+    "version": "1.0.0"
+  },
+  "sectors": [
+    { "id": "frontier", "name": "Frontier Models & Big Tech", "badge_color": "indigo" },
+    { "id": "open-weights", "name": "Open-Weights & China AI", "badge_color": "emerald" },
+    { "id": "robotics", "name": "Embodied AI & Humanoid Robotics", "badge_color": "amber" },
+    { "id": "policy-chips", "name": "Chính sách, Bán dẫn & Hạ tầng", "badge_color": "rose" },
+    { "id": "research", "name": "Đột phá Học thuật & ArXiv", "badge_color": "cyan" }
+  ],
+  "overviews": [
+    {
+      "id": "overview-2026-08-09",
+      "slug": "2026-08-09-two-months",
+      "title": "Báo cáo Toàn cảnh AI: Tháng 8 – Cuối tháng 9/2026",
+      "subtitle": "Kỷ nguyên Test-Time Compute, Trillion-Scale MoE, Cột mốc Humanoid IPO và Giờ G thực thi EU AI Act",
+      "period": "01/08/2026 – 30/09/2026",
+      "published_at": "2026-10-12",
+      "reading_time": "15 phút",
+      "summary": "Toàn cảnh bước nhảy vọt quý 3/2026: GPT-6 series & Gemini 4 Argon (1M output token), làn sóng mã nguồn mở DeepSeek-V4 và Qwen 3.8, Unitree IPO rực sáng sàn chứng khoán, Điều 50 EU AI Act có hiệu lực pháp lý.",
+      "tags": ["Frontier Models", "Open-Weights", "Humanoid Robotics", "EU AI Act", "Test-Time Compute", "Engram Memory"],
+      "deep_dive_ids": [
+        "prefix-sliding-test-time-compute",
+        "deepseek-v4-engram-memory",
+        "unitree-humanoid-ipo-and-superman"
+      ]
+    }
+  ],
+  "weekly_reports": [
+    {
+      "id": "weekly-2026-w41",
+      "slug": "2026-w41",
+      "title": "Báo cáo Tuần 41/2026: Dư chấn sau làn sóng Frontier & Động thái đầu tháng 10",
+      "subtitle": "Hậu Meta Connect 2026, phản hồi ban đầu về Gemini 4 Argon và chiến sự mô hình thế giới",
+      "week_number": 41,
+      "year": 2026,
+      "period": "05/10/2026 – 11/10/2026",
+      "published_at": "2026-10-12",
+      "reading_time": "8 phút",
+      "parent_overview_id": "overview-2026-08-09",
+      "summary": "Cập nhật tiếp nối bản toàn cảnh 2 tháng: Các benchmark độc lập đầu tiên của Gemini 4 Argon, triển khai thực tế của Figure 03 tại xưởng sản xuất, và đánh giá tác động tuân thủ EU AI Act sau 2 tháng có hiệu lực.",
+      "tags": ["Gemini 4", "Figure 03", "EU AI Act", "Agentic Systems"]
+    }
+  ],
+  "deep_dives": [
+    {
+      "id": "prefix-sliding-test-time-compute",
+      "slug": "prefix-sliding-test-time-compute",
+      "title": "Giải mã 'Prefix Sliding': Bước nhảy vọt $3\\times$ Tốc độ Suy luận trong Test-Time Compute",
+      "subtitle": "Tại sao chuỗi tư duy dài (Long CoT) làm sụp đổ bộ nhớ KV-Cache và cách Stanford giải bài toán này mà không cần huấn luyện lại",
+      "published_at": "2026-10-12",
+      "reading_time": "10 phút",
+      "sector": "research",
+      "tags": ["Test-Time Compute", "KV-Cache", "Inference Efficiency", "Stanford", "ArXiv"],
+      "parent_overview_id": "overview-2026-08-09",
+      "overview_section_anchor": "#5-xu-huong-nghien-cuu-hoc-thuat-cot-loi-arxiv--hoi-thao",
+      "summary": "Bài phân tích trực quan về kỹ thuật Prefix Sliding (arXiv:2608.26070). Minh họa so sánh bộ nhớ trước và sau, công thức toán học và tác động trực tiếp tới các mô hình reasoning hiện đại."
+    },
+    {
+      "id": "deepseek-v4-engram-memory",
+      "slug": "deepseek-v4-engram-memory",
+      "title": "Bên trong DeepSeek-V4.1: Cơ chế Engram Memory & Bí quyết Nén KV-Cache ~890 Bytes",
+      "subtitle": "Khám phá kiến trúc Causal Encoder-Decoder mới và kỹ thuật lưu trữ dấu vết bộ nhớ dài hạn của DeepSeek",
+      "published_at": "2026-10-12",
+      "reading_time": "12 phút",
+      "sector": "open-weights",
+      "tags": ["DeepSeek", "Engram Memory", "KV Compression", "MoE Architecture", "Open Weights"],
+      "parent_overview_id": "overview-2026-08-09",
+      "overview_section_anchor": "#2-su-but-pha-cua-open-weights--lab-ai-trung-quoc",
+      "summary": "Mổ xẻ kiến trúc DeepSeek-V4.1-Flash phát hành ngày 10/09/2026: Cách Engram memory hoạt động như cơ chế ghi nhớ vỏ não sinh học, bảng so sánh kích thước KV-cache và tiềm năng cho Edge/On-premise."
+    },
+    {
+      "id": "unitree-humanoid-ipo-and-superman",
+      "slug": "unitree-humanoid-ipo-and-superman",
+      "title": "Cú Bứt phá của Unitree Robotics: Từ Cơn sốt IPO STAR Market đến Robot 'Superman'",
+      "subtitle": "Phân tích thương mại hóa Robot hình người: Định giá thị trường, kỷ lục chạy 12.66 m/s và chiến lược phần cứng giá rẻ",
+      "published_at": "2026-10-12",
+      "reading_time": "9 phút",
+      "sector": "robotics",
+      "tags": ["Unitree", "Humanoid Robotics", "STAR Market IPO", "Superman Bipedal", "Embodied AI"],
+      "parent_overview_id": "overview-2026-08-09",
+      "overview_section_anchor": "#3-embodied-ai--humanoid-robotics-robot-hinh-nguoi",
+      "summary": "Toàn cảnh sự kiện Unitree niêm yết cổ phiếu ngày 19/08/2026 (tăng 620%), phân tích động học của nguyên mẫu Superman (nhảy cao 2m, vận tốc 12.66 m/s) và so sánh lộ trình thương mại hóa với Tesla Optimus và Figure AI."
+    }
+  ]
+}
