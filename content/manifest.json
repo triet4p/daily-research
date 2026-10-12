@@ -48,6 +48,37 @@
       "tags": ["Mistral Large 4", "Gemini 4 Argon", "Claude Haiku 5.5", "OpenAI Intelligent UI", "Figure 03", "EU AI Act", "Sovereign AI"]
     }
   ],
+  "daily_reports": [
+    {
+      "id": "daily-2026-10-12",
+      "slug": "2026-10-12",
+      "date": "2026-10-12",
+      "day_of_week": "Thứ Hai",
+      "week_number": 42,
+      "year": 2026,
+      "title": "Daily Pulse: 12/10/2026 — Làn Sóng GEV/JEV Trên Hugging Face, Robot Reactive Control 'Reflex' và SoftwareGym Cho Computer-Use",
+      "subtitle": "Bản tin tình báo công nghệ đa kênh: AutoTrust tung GuruSearch, UW công bố Reflex, NVIDIA Medtech mở mã nguồn 3D Body, và tranh luận về độ trễ Clef vs Haiku 5.5",
+      "reading_time": "7 phút",
+      "channels_monitored": [
+        "Hugging Face Hub",
+        "ArXiv Daily Papers",
+        "GitHub Trending",
+        "X / Tech Discussions",
+        "Lab Releases"
+      ],
+      "tags": [
+        "Daily Pulse",
+        "Hugging Face",
+        "Decision Models",
+        "Reflex Robotics",
+        "SoftwareGym",
+        "GitHub Trending"
+      ],
+      "parent_weekly_id": "weekly-2026-w41",
+      "related_overview_id": "overview-2026-08-09",
+      "summary": "Radar quét đa kênh ngày 12/10/2026: AutoTrust mở kho mô hình GEV/JEV-27B Decision Models, bài báo Reflex của ĐH Washington đem phản xạ xúc giác nhanh lên robot hai chân, SoftwareGym mở môi trường sandbox đo lường Computer-Use Agent, và tác giả công cụ ARTEX đóng repo vì lo ngại Agentic Misuse."
+    }
+  ],
   "deep_dives": [
     {
       "id": "prefix-sliding-test-time-compute",

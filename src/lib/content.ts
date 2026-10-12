@@ -34,6 +34,23 @@ export interface ManifestWeekly {
   tags: string[];
 }
 
+export interface ManifestDaily {
+  id: string;
+  slug: string;
+  date: string;
+  day_of_week: string;
+  week_number: number;
+  year: number;
+  title: string;
+  subtitle: string;
+  reading_time: string;
+  channels_monitored: string[];
+  tags: string[];
+  parent_weekly_id?: string;
+  related_overview_id?: string;
+  summary: string;
+}
+
 export interface ManifestDeepDive {
   id: string;
   slug: string;
@@ -58,6 +75,7 @@ export interface Manifest {
   sectors: Array<{ id: string; name: string; badge_color: string }>;
   overviews: ManifestReport[];
   weekly_reports: ManifestWeekly[];
+  daily_reports: ManifestDaily[];
   deep_dives: ManifestDeepDive[];
 }
 
@@ -208,5 +226,40 @@ export function getAllWeeklyReports(): (ManifestWeekly & { parentOverview?: Mani
   return manifest.weekly_reports.map((w) => ({
     ...w,
     parentOverview: manifest.overviews.find((o) => o.id === w.parent_overview_id),
+  }));
+}
+
+export function getDailyBySlug(slug: string): (ArticleData & { manifestItem?: ManifestDaily; parentWeekly?: ManifestWeekly; relatedOverview?: ManifestReport }) | null {
+  const manifest = getManifest();
+  const manifestItem = (manifest.daily_reports || []).find((d) => d.slug === slug);
+  const filePath = path.join(contentDirectory, "daily", `${slug}.mdx`);
+
+  if (!fs.existsSync(filePath)) {
+    return null;
+  }
+
+  const raw = fs.readFileSync(filePath, "utf-8");
+  const { data, content } = matter(raw);
+  const processedContent = renderLatex(content);
+  const htmlContent = marked.parse(processedContent) as string;
+
+  const weeklyId = manifestItem?.parent_weekly_id || (data.parent_weekly_id as string);
+  const overviewId = manifestItem?.related_overview_id || (data.related_overview_id as string);
+
+  return {
+    meta: { ...manifestItem, ...data },
+    content,
+    htmlContent,
+    manifestItem,
+    parentWeekly: manifest.weekly_reports.find((w) => w.id === weeklyId),
+    relatedOverview: manifest.overviews.find((o) => o.id === overviewId),
+  };
+}
+
+export function getAllDailyReports(): (ManifestDaily & { parentWeekly?: ManifestWeekly })[] {
+  const manifest = getManifest();
+  return (manifest.daily_reports || []).map((d) => ({
+    ...d,
+    parentWeekly: manifest.weekly_reports.find((w) => w.id === d.parent_weekly_id),
   }));
 }

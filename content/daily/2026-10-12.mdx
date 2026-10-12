@@ -1,0 +1,112 @@
+---
+id: "daily-2026-10-12"
+slug: "2026-10-12"
+date: "2026-10-12"
+day_of_week: "Thứ Hai"
+week_number: 42
+year: 2026
+title: "Daily Pulse: 12/10/2026 — Làn Sóng GEV/JEV Trên Hugging Face, Robot Reactive Control 'Reflex' và SoftwareGym Cho Computer-Use"
+subtitle: "Bản tin tình báo công nghệ đa kênh: AutoTrust tung GuruSearch, UW công bố Reflex, NVIDIA Medtech mở mã nguồn 3D Body, và tranh luận về độ trễ Clef vs Haiku 5.5"
+reading_time: "7 phút"
+author: "AI Research Intelligence Lab"
+parent_weekly_id: "weekly-2026-w41"
+parent_weekly_slug: "2026-w41"
+parent_weekly_title: "Báo cáo Tuần 41/2026: Dư chấn sau làn sóng Frontier & Động thái đầu tháng 10"
+related_overview_id: "overview-2026-08-09"
+related_overview_slug: "2026-08-09-two-months"
+related_overview_title: "Báo cáo Toàn cảnh AI: Tháng 8 – Cuối tháng 9/2026"
+channels_monitored: ["Hugging Face Hub", "ArXiv Daily Papers", "GitHub Trending", "X / Tech Discussions", "Lab Releases"]
+tags: ["Daily Pulse", "Hugging Face", "Decision Models", "Reflex Robotics", "SoftwareGym", "GitHub Trending"]
+summary: "Radar quét đa kênh ngày 12/10/2026: AutoTrust mở kho mô hình GEV/JEV-27B Decision Models, bài báo Reflex của ĐH Washington đem phản xạ xúc giác nhanh lên robot hai chân, SoftwareGym mở môi trường sandbox đo lường Computer-Use Agent, và tác giả công cụ ARTEX đóng repo vì lo ngại Agentic Misuse."
+---
+
+# Daily Pulse: 12/10/2026 — Làn Sóng GEV/JEV Trên Hugging Face & Phản Xạ Robot Học "Reflex"
+
+> 🔗 **Định vị phân cấp**: Báo cáo ngày thuộc chu kỳ **[Tuần 41/2026](/weekly/2026-w41)** và kế thừa bối cảnh từ **[Báo cáo Toàn cảnh 2 Tháng](/overview/2026-08-09-two-months)**.  
+> 👉 [Xem Báo cáo Tuần 41](/weekly/2026-w41) | [Xem Toàn cảnh 2 Tháng](/overview/2026-08-09-two-months)
+
+---
+
+Khác với báo cáo tuần hay báo cáo tháng tập trung vào các chuyển dịch kiến trúc vĩ mô, **Daily Pulse** là kênh quét radar diện rộng hàng ngày: theo dõi các đợt thả checkpoint (Model Drops) trên Hugging Face, bài báo mới trên arXiv, biến động repo GitHub Trending và các luồng tranh luận kỹ thuật nóng nhất trên X (Twitter) và diễn đàn kỹ sư.
+
+---
+
+## 📡 Radar Quét Đa Kênh Hôm Nay (Multi-Channel Snapshot)
+
+![Radar tình báo công nghệ ngày 12/10/2026](/images/daily/2026-10-12-daily-pulse.webp)
+
+```
+[KÊNH QUÉT]               [TÍN HIỆU CỐT LÕI HÔM NAY - 12/10/2026]
+Hugging Face Hub    ───>  AutoTrust thả bộ ba GEV-26B-Decide & JEV-27B-VL; LTX-2.5 dẫn đầu lượt tải.
+ArXiv Daily Papers  ───>  Reflex (UW): Phản xạ thị giác nhanh cho robot; SoftwareGym: Sandbox Computer-Use.
+GitHub Trending     ───>  NVIDIA-Medtech ra mắt NV-Generate-Body; Tác giả ARTEX đóng repo vì cảnh báo an ninh.
+X & Community Buzz  ───>  Kỹ sư benchmark độ trễ thực tế: Cloudflare Clef-flash (39ms) vs Claude Haiku 5.5.
+```
+
+---
+
+## 🔥 1. Model Drops & Hugging Face Hub: Bùng Nổ Decision Models Nguồn Mở
+
+Sau khi TypeSafe công bố Jev vào giữa tháng 9, cộng đồng mã nguồn mở trên Hugging Face đang chứng kiến làn sóng nhân bản và tối ưu hóa các mô hình **System 1 Decision Models**:
+
+* **AutoTrust GEV & JEV Series (`autotrust/GuruSearch`, `GEV-26B-Decide`, `JEV-27B-VL`):**
+  * AutoTrust hôm nay chính thức đưa lên Hub bộ checkpoint kết hợp giữa **System 1 (phản xạ định tuyến calibrated <100ms)** và **System 2 (tư duy phản biện reflective)**.
+  * `GEV-26B-Decide` đạt điểm cao trong bài toán phân loại đa nhãn và trích xuất ý định tìm kiếm, được cộng đồng tích hợp ngay vào các pipeline RAG để lọc tài liệu trước khi gọi LLM đắt đỏ.
+* **Lightricks LTX-2.5 Duy Trì Vị Trí #1 Trending:**
+  * Mô hình thế giới mở (Open World Model) LTX-2.5 tiếp tục dẫn đầu danh sách Trending Models trên Hugging Face Hub, với hàng chục biến thể ComfyUI và pipeline suy luận cục bộ được cộng đồng chia sẻ trong 48 giờ qua.
+* **Qwen-Image-2.1-Turbo & Bản Lượng Tử GGUF:**
+  * Alibaba Qwen tiếp tục nhận được sự đón nhận lớn từ cộng đồng với các bản lượng tử hóa GGUF của `Qwen-Image-2.1-Turbo`, cho phép chạy mượt mà trên máy tính cá nhân 16GB RAM.
+
+---
+
+## 🔬 2. Top Bài Báo ArXiv & Hugging Face Papers Đáng Đọc Hôm Nay
+
+### 1. *Reflex: Visually Grounded Reactive Control for Humanoid Robots* (Đại học Washington)
+* **Ý tưởng:** Kế thừa trực tiếp tinh thần của hội nghị CoRL 2026 (như DexFLEX), bài báo giới thiệu chính sách phản xạ nhanh dựa trên thị giác kết hợp xúc giác (Reactive Control Policy).
+* **Kết quả:** Thay vì chờ VLA planner tính toán quỹ đạo ở tần số 5–10 Hz, tầng phản xạ *Reflex* chạy độc lập ở **80 Hz**, giúp robot hai chân tự động thu hồi chân và ổn định thăng bằng ngay trong khoảnh khắc trượt chân trên bề mặt trơn ướt.
+* **Link:** [Hugging Face Papers: Reflex (UW)](https://huggingface.co/papers)
+
+### 2. *SoftwareGym: A Scaled Environment for Training GUI Agents* (Đại học Giao thông Thượng Hải)
+* **Vấn đề:** Các Computer-Use Agent (như GPT-6 Astra hay Claude Sonnet 5.5) thường bị thiếu môi trường sandbox thực tế để rèn luyện kỹ năng click/type/scroll đa bước.
+* **Đóng góp:** SoftwareGym cung cấp 10.000 tác vụ mô phỏng hệ điều hành (trên Ubuntu, Windows, macOS) với hệ thống verifier tự động chấm điểm từng thao tác chuột và phím của Agent.
+* **Link:** [Hugging Face Papers: SoftwareGym](https://huggingface.co/papers)
+
+### 3. *SoloQ: Calibration-Free Post-Training Quantization for Diffusion Language Models* (USC)
+* **Đóng góp:** Kỹ thuật lượng tử hóa sau huấn luyện (PTQ) không cần dữ liệu hiệu chuẩn, giúp nén các mô hình Diffusion Language Model (dLLMs) xuống kích thước 4-bit mà không làm suy giảm tốc độ giải mã song song 1.400 token/giây.
+
+---
+
+## 💻 3. GitHub Trending & Cảnh Báo An Ninh Mạng
+
+* **NVIDIA-Medtech / `NV-Generate-Body`:**
+  * NVIDIA hôm nay cập nhật bộ công cụ tạo mô hình 3D tiềm ẩn (3D Latent Diffusion) trong y tế. Mô hình cho phép tạo ra các lớp mặt nạ (masks) giải phẫu cơ thể CT/MRI 3D có thể kiểm soát các thông số cơ quan nội tạng và khối u phục vụ nghiên cứu ung thư.
+  * Repo: `github.com/NVIDIA-Medtech/NV-Generate-CTMR`
+* **Cảnh Báo An Ninh Mạng: Tác Giả ARTEX Đóng Kho Mã Nguồn:**
+  * Nhà phát triển công cụ kiểm thử xâm nhập tự động `ARTEX` bất ngờ thông báo gỡ bỏ repo công khai trên GitHub, chuyển sang định dạng phân phối hạn chế kín.
+  * Nguyên nhân: Các cơ quan an ninh mạng tại Đông Á phát hiện công cụ này bị các nhóm tấn công mạng vũ khí hóa (weaponized), biến thành các Agent tự hành chuyên quét và khai thác lỗ hổng cơ sở dữ liệu tài chính mà không cần sự can thiệp của con người.
+
+---
+
+## 🌐 4. X (Twitter) & Tech Buzz: Cộng Đồng Đang Bàn Tán Gì?
+
+1. **Tranh cãi quanh việc hoãn GPT-6.1 Astra:**
+   * Sau thông tin OpenAI lùi lịch GPT-6.1 Astra vì rủi ro an toàn mạng, các kỹ sư trên X đang chia làm hai phe: một bên ca ngợi sự thận trọng của OpenAI trước hiểm họa *Excessive Agency (OWASP LLM06)*, trong khi phe mã nguồn mở cho rằng các mô hình như Mistral Large 4 hay Qwen 3.8 sẽ nhanh chóng lấp đầy khoảng trống này.
+2. **So sánh thực chiến: Cloudflare Clef-flash (39ms) vs Claude Haiku 5.5 (<100ms):**
+   * Các cuộc thảo luận trên HackerNews và X nhấn mạnh rằng đối với các bài toán phân loại ý định (Intent Routing), việc dùng **Clef-flash** trên Cloudflare Workers AI với chi phí $0 token đầu ra đang giúp nhiều startup tiết kiệm từ 500 đến 2.000 USD tiền API mỗi tháng so với việc gọi Haiku cho mọi request.
+
+---
+
+## 📚 Thư Mục Nguồn Gốc Trong Ngày (Primary Daily Sources)
+
+1. **AutoTrust Model Hub Releases:** [Hugging Face: autotrust/GEV-26B-Decide & JEV-27B](https://huggingface.co/autotrust/GEV-26B-Decide)
+2. **ArXiv / HF Daily Paper - Reflex (Humanoid Control):** [University of Washington Robotics Lab Pre-print](https://huggingface.co/papers)
+3. **ArXiv / HF Daily Paper - SoftwareGym:** [SJTU Scaled GUI Environments for Agents](https://huggingface.co/papers)
+4. **NVIDIA Medical 3D Generation Repo:** [GitHub: NVIDIA-Medtech/NV-Generate-CTMR](https://github.com/NVIDIA-Medtech/NV-Generate-CTMR)
+5. **Lightricks LTX-2.5 Trending Weights:** [Hugging Face Hub Models](https://huggingface.co/models)
+
+---
+
+> 🔗 **Đọc thêm về các chuyển động nền tảng**:  
+> 👉 **[Báo cáo Tuần 41/2026: Dư chấn sau làn sóng Frontier](/weekly/2026-w41)**  
+> 👉 **[Báo cáo Toàn cảnh AI: Tháng 8 – Cuối tháng 9/2026](/overview/2026-08-09-two-months)**  
+> 👉 **[Kỷ Nguyên Decision Model (System 1): Trả Tự Do Khỏi 'JSON Streaming Tax'](/deep-dives/system-1-decision-models-jev-laya)**

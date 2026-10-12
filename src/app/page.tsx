@@ -1,12 +1,14 @@
 import Link from "next/link";
-import { Sparkles, Layers, Calendar, BookOpen, ArrowRight, Clock } from "lucide-react";
-import { getManifest, getAllOverviews, getAllDeepDives, getAllWeeklyReports } from "@/lib/content";
+import { Sparkles, Layers, Calendar, BookOpen, ArrowRight, Clock, Sun, Radio, Tag } from "lucide-react";
+import { getAllOverviews, getAllDeepDives, getAllWeeklyReports, getAllDailyReports } from "@/lib/content";
 
 export default function HomePage() {
   const overviews = getAllOverviews();
   const deepDives = getAllDeepDives();
   const weeklyReports = getAllWeeklyReports();
+  const dailyReports = getAllDailyReports();
 
+  const latestDaily = dailyReports[0];
   const featuredOverview = overviews[0];
   const latestWeekly = weeklyReports[0];
 
@@ -25,25 +27,25 @@ export default function HomePage() {
           </h1>
 
           <p className="mt-4 text-base text-[var(--text-muted)] sm:text-lg leading-relaxed">
-            Hệ thống báo cáo toàn cảnh định kỳ kết hợp chuyên đề phân tích sâu. Lưu trữ có cấu trúc trực tiếp trong Git, hỗ trợ AI đọc hiểu xuyên suốt mọi session và tự động deploy Vercel.
+            Hệ thống nghiên cứu đa tầng kết hợp: <strong>Radar Hàng Ngày</strong> quét rộng tín hiệu thị trường, <strong>Báo Cáo Hàng Tuần</strong>, <strong>Bản Toàn Cảnh Định Kỳ</strong> và <strong>Chuyên Đề Phân Tích Sâu</strong>. Dữ liệu lưu trữ có cấu trúc trực tiếp trong Git và tự động deploy Vercel.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
-              href="/overview"
+              href="/daily"
               className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--accent-hover)] shadow-sm"
             >
-              <Layers className="h-4 w-4" />
-              <span>Xem Toàn cảnh 2 Tháng (T8 - T9/2026)</span>
+              <Radio className="h-4 w-4 animate-pulse" />
+              <span>Xem Nhịp Đập Hôm Nay (Daily Pulse)</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
 
             <Link
-              href="/deep-dives"
+              href="/overview"
               className="inline-flex items-center gap-2 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-surface-elevated)] px-5 py-2.5 text-sm font-semibold text-[var(--text-main)] transition hover:border-[var(--border-hover)]"
             >
-              <BookOpen className="h-4 w-4 text-[var(--accent)]" />
-              <span>Khám phá Chuyên đề Sâu</span>
+              <Layers className="h-4 w-4 text-[var(--accent)]" />
+              <span>Bản Toàn Cảnh 2 Tháng</span>
             </Link>
           </div>
         </div>
@@ -51,23 +53,88 @@ export default function HomePage() {
         {/* Quick Stats Bar */}
         <div className="mt-10 grid grid-cols-2 gap-4 border-t border-[var(--border-subtle)] pt-6 sm:grid-cols-4">
           <div>
-            <div className="font-serif text-2xl font-bold text-[var(--text-main)] sm:text-3xl">{overviews.length}</div>
-            <div className="text-xs text-[var(--text-muted)] font-medium">Báo cáo Toàn cảnh</div>
-          </div>
-          <div>
-            <div className="font-serif text-2xl font-bold text-[var(--accent)] sm:text-3xl">{deepDives.length}</div>
-            <div className="text-xs text-[var(--text-muted)] font-medium">Chuyên đề Phân tích sâu</div>
+            <div className="font-serif text-2xl font-bold text-[var(--accent)] sm:text-3xl">{dailyReports.length}</div>
+            <div className="text-xs text-[var(--text-muted)] font-medium">Radar Hàng ngày</div>
           </div>
           <div>
             <div className="font-serif text-2xl font-bold text-[var(--text-main)] sm:text-3xl">{weeklyReports.length}</div>
             <div className="text-xs text-[var(--text-muted)] font-medium">Báo cáo Hàng tuần</div>
           </div>
           <div>
-            <div className="font-serif text-2xl font-bold text-[var(--text-main)] sm:text-3xl">100%</div>
-            <div className="text-xs text-[var(--text-muted)] font-medium">Lưu trữ Git & Vercel CI</div>
+            <div className="font-serif text-2xl font-bold text-[var(--text-main)] sm:text-3xl">{overviews.length}</div>
+            <div className="text-xs text-[var(--text-muted)] font-medium">Báo cáo Toàn cảnh</div>
+          </div>
+          <div>
+            <div className="font-serif text-2xl font-bold text-[var(--text-main)] sm:text-3xl">{deepDives.length}</div>
+            <div className="text-xs text-[var(--text-muted)] font-medium">Chuyên đề Phân tích sâu</div>
           </div>
         </div>
       </div>
+
+      {/* TODAY'S DAILY PULSE (Prominent Daily Section) */}
+      {latestDaily && (
+        <div className="mt-10 rounded-2xl border-2 border-[var(--accent-border)] bg-[var(--bg-surface-elevated)] p-6 sm:p-8 shadow-sm transition-colors duration-200">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--accent)] px-3 py-1 text-xs font-bold text-white shadow-sm">
+                <Radio className="h-3.5 w-3.5 animate-pulse" />
+                NHỊP ĐẬP HÔM NAY (DAILY PULSE)
+              </span>
+              <span className="font-mono text-xs font-semibold text-[var(--text-main)] flex items-center gap-1">
+                <Sun className="h-3.5 w-3.5 text-[var(--accent)]" />
+                {latestDaily.day_of_week}, {latestDaily.date}
+              </span>
+            </div>
+
+            <div className="flex flex-wrap gap-1.5">
+              {latestDaily.channels_monitored.map((ch) => (
+                <span
+                  key={ch}
+                  className="rounded-md bg-[var(--bg-surface)] px-2 py-0.5 text-[11px] font-medium text-[var(--text-muted)] border border-[var(--border-subtle)]"
+                >
+                  {ch}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <h2 className="mt-4 font-serif text-2xl font-bold text-[var(--text-main)] sm:text-3xl leading-snug">
+            <Link href={`/daily/${latestDaily.slug}`} className="hover:text-[var(--accent)] transition">
+              {latestDaily.title}
+            </Link>
+          </h2>
+
+          <p className="mt-2 text-sm text-[var(--accent)] font-medium">
+            {latestDaily.subtitle}
+          </p>
+
+          <p className="mt-3 text-sm text-[var(--text-muted)] leading-relaxed">
+            {latestDaily.summary}
+          </p>
+
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--border-subtle)] pt-4">
+            <div className="flex items-center gap-3 text-xs text-[var(--text-muted)]">
+              <span className="flex items-center gap-1">
+                <Clock className="h-3.5 w-3.5" />
+                Đọc trong {latestDaily.reading_time}
+              </span>
+              {latestDaily.parentWeekly && (
+                <span className="border-l border-[var(--border-subtle)] pl-3">
+                  Thuộc chu kỳ: <Link href={`/weekly/${latestDaily.parentWeekly.slug}`} className="text-[var(--text-main)] hover:underline font-medium">Tuần {latestDaily.parentWeekly.week_number}</Link>
+                </span>
+              )}
+            </div>
+
+            <Link
+              href={`/daily/${latestDaily.slug}`}
+              className="group inline-flex items-center gap-1.5 text-sm font-bold text-[var(--accent)] transition hover:text-[var(--accent-hover)]"
+            >
+              <span>Xem đầy đủ các tín hiệu hôm nay</span>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+      )}
 
       {/* Main Grid: Featured Overview & Weekly */}
       <div className="mt-12 grid gap-8 lg:grid-cols-3">

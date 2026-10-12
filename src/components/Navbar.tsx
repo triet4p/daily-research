@@ -28,6 +28,16 @@ export default function Navbar() {
             Dashboard
           </Link>
           <Link
+            href="/daily"
+            className="flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-[var(--text-muted)] transition hover:bg-[var(--bg-surface-elevated)] hover:text-[var(--text-main)] sm:text-sm"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent)] opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--accent)]"></span>
+            </span>
+            <span>Hàng ngày</span>
+          </Link>
+          <Link
             href="/overview"
             className="flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-[var(--text-muted)] transition hover:bg-[var(--bg-surface-elevated)] hover:text-[var(--text-main)] sm:text-sm"
           >

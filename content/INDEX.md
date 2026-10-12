@@ -18,6 +18,16 @@ Báo cáo chu kỳ lớn (2 tháng, quý, năm) cung cấp góc nhìn vĩ mô v�
     4. `corl-2026-robot-learning-agentic-stack`
     5. `system-1-decision-models-jev-laya`
 
+
+---
+
+## ☀️ 2. Nhịp Đập Hàng Ngày (Daily Pulse)
+Kênh radar diện rộng cập nhật đa kênh hàng ngày: Hugging Face Trending, ArXiv Daily Papers, GitHub Repos, và X (Twitter) Tech Buzz.
+
+* **[12/10/2026] Làn Sóng GEV/JEV Trên Hugging Face, Robot 'Reflex' & SoftwareGym** (`content/daily/2026-10-12.mdx`)
+  * *Kênh theo dõi*: Hugging Face Hub, ArXiv, GitHub Trending, X/Twitter, Lab Releases.
+  * *Quy chiếu*: `weekly-2026-w41` | `overview-2026-08-09`.
+  * *Nội dung*: AutoTrust ra mắt series GEV/JEV-27B Decision Models; bài báo Reflex (UW) phản xạ xúc giác nhanh cho humanoid; SoftwareGym (SJTU) benchmark Computer-Use; tác giả ARTEX đóng repo vì cảnh báo an ninh mạng.
 ---
 
 ## ⚡ 2. Báo cáo Hàng tuần (Weekly Reports)
