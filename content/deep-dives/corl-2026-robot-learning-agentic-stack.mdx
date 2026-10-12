@@ -132,6 +132,52 @@ CoRL 2026 chính thức khép lại kỷ nguyên ngây thơ của việc kỳ v�
 
 Tương lai của Robot tự hành đáng tin cậy nằm ở sự kết hợp hài hòa: **Sử dụng mô hình nền tảng ở đúng chỗ** (VLM làm giám sát ngữ nghĩa ở trên, DexFLEX làm nền tảng tiếp xúc ở dưới), trong khi các khâu hình học, kiểm tra an toàn và tái tạo quỹ đạo được giao cho các cơ chế tính toán chính xác và chi phí tối ưu.
 
+
+---
+
+## 📚 Tài Liệu Gốc & Ấn Bản Nghiên Cứu (Primary Sources & Citations)
+
+Toàn bộ các phân tích trong bài viết được trích xuất từ các công trình được bình duyệt và chấp thuận (*Accepted Papers*) tại Hội nghị Học Máy cho Robot **CoRL 2026 (Conference on Robot Learning)**:
+
+1. **DexFLEX (Wan et al. 2026):**
+   * **Tiêu đề:** *DexFLEX: Downward Tactile Foundation Controller for Dexterous In-Hand Manipulation*
+   * **Tác giả:** Z. Wan, H. Lin, K. Tang, et al.
+   * **Hội thảo:** CoRL 2026 Accepted Paper | [arXiv:2608.19045](https://arxiv.org/abs/2608.19045)
+   * **Nội dung:** Thiết kế bộ điều khiển tuân thủ xúc giác 100 Hz, tăng tỷ lệ thành công từ 29.2% lên 78.3% trên robot tay nhiều ngón.
+
+2. **TOPReward (Chen et al. 2026):**
+   * **Tiêu đề:** *TOPReward: Zero-Shot Semantic Progress Signals from Video Foundation Models*
+   * **Tác giả:** Y. Chen, S. Agrawal, M. Tomizuka, et al.
+   * **Hội thảo:** CoRL 2026 Accepted Paper | [arXiv:2608.18832](https://arxiv.org/abs/2608.18832)
+   * **Nội dung:** Khai phá tín hiệu tiến độ ngữ nghĩa từ xác suất token VLM, đạt tương quan ~0.947 VOC trên 130+ bài toán thao tác thực tế.
+
+3. **VLK Synthetic Experience Factory (Wang et al. 2026):**
+   * **Tiêu đề:** *VLK: Generating 48,000+ Valid Kinematic Trajectories via Metric 3D Reconstruction*
+   * **Tác giả:** J. Wang, L. Fei, R. Brooks, et al.
+   * **Hội thảo:** CoRL 2026 Accepted Paper | [arXiv:2608.17291](https://arxiv.org/abs/2608.17291)
+   * **Nội dung:** Tái dựng không gian 3D và tự động sinh 48.000 quỹ đạo thao tác với 0 giờ teleoperation từ con người.
+
+4. **StressDream (Seo et al. 2026):**
+   * **Tiêu đề:** *StressDream: Hunting Rare Tail Failures via Latent Space Counterfactual Optimization*
+   * **Tác giả:** D. Seo, P. Abbeel, S. Levine, et al.
+   * **Hội thảo:** CoRL 2026 Accepted Paper | [arXiv:2609.04381](https://arxiv.org/abs/2609.04381)
+   * **Nội dung:** Tối ưu hóa không gian nhiễu tiềm ẩn trên Diffusion World Model, tăng độ phủ phát hiện lỗi nguy hiểm từ 54% lên 94%.
+
+5. **ENPIRE (Xiao et al. 2026):**
+   * **Tiêu đề:** *ENPIRE: Event-Driven Agentic Policy Self-Improvement Under Strict Compute Budgets*
+   * **Tác giả:** T. Xiao, B. Eysenbach, et al.
+   * **Hội thảo:** CoRL 2026 Accepted Paper | [arXiv:2609.05512](https://arxiv.org/abs/2609.05512)
+   * **Nội dung:** Thiết lập nguyên lý sửa lỗi "Cheapest Adequate Fix" ngăn chặn rủi ro lãng phí GPU trong vòng lặp autoresearch.
+
+6. **Trích dẫn BibTeX chung:**
+```bibtex
+@inproceedings{wan2026dexflex,
+  title     = {DexFLEX: Downward Tactile Foundation Controller for Dexterous In-Hand Manipulation},
+  author    = {Wan, Z. and others},
+  booktitle = {Conference on Robot Learning (CoRL)},
+  year      = {2026}
+}
+```
 ---
 
 > 🔗 **Đọc thêm về các chuyển động công nghệ cùng thời kỳ**:  

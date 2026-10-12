@@ -128,6 +128,36 @@ class PrefixSlidingKVCacheManager:
 Prefix Sliding là một minh chứng rõ ràng cho thấy: **Kỷ nguyên tối ưu hóa AI đã chuyển từ pre-training sang inference systems.** 
 Thay vì phải mua thêm hàng ngàn GPU đắt đỏ để chứa KV-cache của các chuỗi reasoning dài ngoằng, các kỹ thuật phân bổ bộ nhớ thông minh như Prefix Sliding giúp các doanh nghiệp cắt giảm ngay lập tức $70\%$ chi phí vận hành máy chủ phục vụ mô hình suy luận.
 
+
+---
+
+## 📚 Tài Liệu Gốc & Ấn Bản Nghiên Cứu (Primary Sources & Citations)
+
+Các phát hiện và phân tích trong bài viết này được tổng hợp và đối chiếu trực tiếp từ các ấn phẩm nghiên cứu gốc:
+
+1. **Bài báo nghiên cứu cốt lõi (Core Paper):**
+   * **Tiêu đề:** *Prefix Sliding for Efficient Test-Time Scaling*
+   * **Tác giả:** Niklas Muennighoff, et al. (Stanford University & Foundation Research)
+   * **Công bố:** 26/08/2026
+   * **Định danh arXiv:** [arXiv:2608.26070](https://arxiv.org/abs/2608.26070) | [Bản PDF](https://arxiv.org/pdf/2608.26070)
+   * **Đóng góp kỹ thuật:** Đề xuất cơ chế Pinned Prefix kết hợp Sliding Window 4K, chứng minh tốc độ giải mã tăng $3\times$ và giảm $75\%$ dung lượng KV-cache trên MATH500 và GPQA mà không cần huấn luyện lại.
+
+2. **Nghiên cứu liên quan về phân bổ Test-Time Compute:**
+   * **Tiêu đề:** *Adaptive Reasoning for Test-Time Compute Allocation*
+   * **Tác giả:** Kassenaar, Yang, & François-Lavet (2026)
+   * **Định danh arXiv:** [arXiv:2608.20256](https://arxiv.org/abs/2608.20256)
+   * **Đóng góp:** Học động cơ chế định tuyến `NoThink`, `Short`, `Long` qua GRPO giúp cắt giảm 41–76% token dư thừa.
+
+3. **Trích dẫn BibTeX chuẩn:**
+```bibtex
+@article{muennighoff2026prefixsliding,
+  title   = {Prefix Sliding for Efficient Test-Time Scaling},
+  author  = {Muennighoff, Niklas and others},
+  journal = {arXiv preprint arXiv:2608.26070},
+  year    = {2026},
+  url     = {https://arxiv.org/abs/2608.26070}
+}
+```
 ---
 
 > 🔗 **Đọc thêm về các chuyển động công nghệ cùng thời kỳ**:  

@@ -160,6 +160,29 @@ Trước khi khép lại bài viết, hãy nhìn lại hệ thống bạn đang 
 
 > **"Trong kiến trúc của bạn, có bao nhiêu 'câu lệnh IF' đắt đỏ đang ngốn tiền vô ích mỗi ngày chỉ vì bạn đang bắt một LLM khổng lồ phải làm công việc của một nút bấm?"**
 
+
+---
+
+## 📚 Tài Liệu Gốc & Ấn Bản Nghiên Cứu (Primary Sources & Citations)
+
+Các số liệu kiểm thử thực nghiệm, kiến trúc RLCD và thông số hệ sinh thái trong bài viết được trích xuất trực tiếp từ các nguồn tài liệu kỹ thuật sau:
+
+1. **Công bố kiến trúc & Mô hình độc quyền:**
+   * **TypeSafe AI Jev System 1 Launch:** [TypeSafe Engineering Blog: Introducing Jev System 1 (15/09/2026)](https://typesafe.ai/blog/introducing-jev-system-1) — Mô tả kiến trúc Single Parallel Forward Pass, 3 Primitives (Choice, Score, Noul) và quy tắc định tuyến Typed Decision Contract.
+
+2. **Kho mã nguồn mở & Mô hình cộng đồng:**
+   * **Cloudflare Clef & Clef-flash:** [Cloudflare Blog: Clef - Open-Source Decision Model on Workers AI](https://blog.cloudflare.com/clef-open-decision-model) | License: Apache 2.0 | Độ trễ 39ms trên Edge.
+   * **Laya Open-Source Framework:** [GitHub: laya-ai/laya](https://github.com/laya-ai/laya) — Kho mã nguồn mở huấn luyện RLCD với Proper Scoring Rules (Brier Loss).
+   * **Laya-mlx (Apple Silicon):** [GitHub: laya-ai/laya-mlx](https://github.com/laya-ai/laya-mlx) — Bản port chạy cục bộ trên chip M-series với độ trễ 7–14ms và bộ nhớ <1GB RAM.
+   * **Stanford & NVIDIA CLM-8B:** *Contrastive Learning for Real-Time Decision Models* (Stanford/NVIDIA Pre-print, 2026) — Ứng dụng so sánh vector state-action.
+   * **AWS Strands Decider 2B:** [AWS Machine Learning Blog: Strands Decider 2B Release](https://aws.amazon.com/blogs/machine-learning/strands-decider-2b) — Tối ưu hóa cho GPU cá nhân RTX 3090.
+
+3. **Báo cáo kiểm thử hạ tầng độc lập:**
+   * **Nexus Agent Infrastructure Benchmark:** *Jev vs Claude Sonnet 5: Real-World Latency, Cost, and Accuracy on 36,218 Production Invocations* (Nexus Research, cuối tháng 9/2026).
+   * **OWASP Top 10 for Large Language Models:** [OWASP LLM06: Excessive Agency](https://genai.owasp.org/llmrisk/llm06-excessive-agency/) — Khung tham chiếu an toàn thông tin cho cơ chế phanh khẩn cấp Agent Guardrail.
+
+4. **Cơ sở lý thuyết nhận thức:**
+   * Kahneman, Daniel. *Thinking, Fast and Slow*. Farrar, Straus and Giroux, 2011.
 ---
 
 > 🔗 **Đọc thêm về các chuyển động công nghệ cùng thời kỳ**:  

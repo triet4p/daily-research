@@ -89,6 +89,24 @@ Một điểm độc đáo khác của DeepSeek-V4.1 là cấu trúc bất đố
 
 Điều này cho thấy mục tiêu chiến lược của DeepSeek: **Đưa toàn bộ mô hình siêu lớn (1.6T params) về vận hành ổn định trên hạ tầng chip nội địa với chi phí bằng một phần nhỏ của phương Tây.**
 
+
+---
+
+## 📚 Tài Liệu Gốc & Ấn Bản Nghiên Cứu (Primary Sources & Citations)
+
+Các thông số kỹ thuật, cấu trúc encoder-decoder và thư viện phần cứng trong bài viết được đối chiếu trực tiếp từ các tài liệu chính thức của DeepSeek-AI:
+
+1. **Thông báo phát hành kỹ thuật (Official Technical Release):**
+   * **DeepSeek API Updates:** [DeepSeek Platform Release Notes (10/09/2026)](https://api-docs.deepseek.com/news/news260910/) — Công bố mô hình DeepSeek-V4.1-Flash, cấu trúc Causal Enc-Dec và bảng định giá peak/off-peak.
+   * **Kho trọng số mô hình:** [Hugging Face: deepseek-ai/DeepSeek-V4-Pro](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro) | Giấy phép: MIT License.
+
+2. **Kho mã nguồn phần cứng & Kernel tối ưu hóa (30/09/2026):**
+   * **TileLang-Ascend:** [GitHub: deepseek-ai/TileLang-Ascend](https://github.com/deepseek-ai/TileLang-Ascend) — Trình biên dịch ngôn ngữ Domain-Specific Language (DSL) cho chip Huawei Ascend.
+   * **DeepGEMM-Ascend:** [GitHub: deepseek-ai/DeepGEMM-Ascend](https://github.com/deepseek-ai/DeepGEMM-Ascend) — Thư viện nhân ma trận MoE tăng tốc độ tính toán FP8 trên NPU nội địa.
+   * **TileKernels:** [GitHub: deepseek-ai/TileKernels](https://github.com/deepseek-ai/TileKernels) — Tập hợp các kernel tùy biến cho Engram memory compression.
+
+3. **Cơ sở lý thuyết sinh học:**
+   * Josselyn, S. A., & Tonegawa, S. (2020). *Memory engrams: Recalling the past and imagining the future*. Science, 367(6473).
 ---
 
 > 🔗 **Đọc thêm về các chuyển động công nghệ cùng thời kỳ**:  
