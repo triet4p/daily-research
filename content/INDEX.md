@@ -24,6 +24,11 @@ Báo cáo chu kỳ lớn (2 tháng, quý, năm) cung cấp góc nhìn vĩ mô v�
 ## ☀️ 2. Nhịp Đập Hàng Ngày (Daily Pulse)
 Kênh radar diện rộng cập nhật đa kênh hàng ngày: Hugging Face Trending, ArXiv Daily Papers, GitHub Repos, và X (Twitter) Tech Buzz.
 
+* **[13/10/2026] RSI-Anything (Tự Cải Tiến Đa Miền), REA (100k Stars) & Meta Muse Wonder** (`content/daily/2026-10-13.mdx`)
+  * *Kênh theo dõi*: X (Twitter) Buzz, GitHub Trending, ArXiv Daily, Meta Labs, Hugging Face Hub.
+  * *Quy chiếu*: `weekly-2026-w41` | `overview-2026-08-09`.
+  * *Nội dung*: Giải mã RSI-Anything & JEPA-Anything (PhAI / Shanghai AI Lab); Cơn sốt 100k stars của MCP server 'Reverse Engineer Anything' kết nối Ghidra/IDA; Meta ra mắt Muse Wonder (1M context) kèm tranh cãi giá API và khóa bản Full trong Muse Code.
+
 * **[12/10/2026] Làn Sóng GEV/JEV Trên Hugging Face, Robot 'Reflex' & SoftwareGym** (`content/daily/2026-10-12.mdx`)
   * *Kênh theo dõi*: Hugging Face Hub, ArXiv, GitHub Trending, X/Twitter, Lab Releases.
   * *Quy chiếu*: `weekly-2026-w41` | `overview-2026-08-09`.

@@ -50,6 +50,36 @@
   ],
   "daily_reports": [
     {
+      "id": "daily-2026-10-13",
+      "slug": "2026-10-13",
+      "date": "2026-10-13",
+      "day_of_week": "Thứ Ba",
+      "week_number": 42,
+      "year": 2026,
+      "title": "Daily Pulse: 13/10/2026 — Đột Phá RSI-Anything (Tự Cải Tiến Đa Miền), Cơn Sốt 'Reverse Engineer Anything' (100k Stars) & Meta Muse Wonder",
+      "subtitle": "Bản tin tình báo công nghệ đa kênh: PhAI Labs mở kho tự cải tiến đệ quy, REA kết nối AI Agent với Ghidra qua MCP, Meta tung Muse Wonder 1M token, và radar Hugging Face Hub",
+      "reading_time": "10 phút",
+      "channels_monitored": [
+        "X (Twitter) Buzz",
+        "GitHub Trending",
+        "Hugging Face Hub",
+        "ArXiv Daily Papers",
+        "Meta Labs"
+      ],
+      "tags": [
+        "Daily Pulse",
+        "RSI-Anything",
+        "JEPA-Anything",
+        "Reverse Engineering",
+        "MCP",
+        "Muse Wonder",
+        "Meta AI"
+      ],
+      "parent_weekly_id": "weekly-2026-w41",
+      "related_overview_id": "overview-2026-08-09",
+      "summary": "Radar quét đa kênh ngày 13/10/2026: Giải mã 3 chủ đề nóng nhất trên X: Framework tự cải tiến đệ quy RSI-Anything dựa trên world model JEPA-Anything, máy chủ MCP 'Reverse Engineer Anything' gây bão với 100k+ stars trên GitHub, và Meta Superintelligence Labs ra mắt dòng mô hình suy luận Muse Wonder (1M context)."
+    },
+    {
       "id": "daily-2026-10-12",
       "slug": "2026-10-12",
       "date": "2026-10-12",
