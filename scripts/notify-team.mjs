@@ -31,11 +31,15 @@ function parseArgs() {
 
 function getLatestItem(manifest, type, slug) {
   if (slug) {
-    if (type === "daily") return { item: manifest.daily_reports?.find(d => d.slug === slug), type: "daily" };
-    if (type === "weekly") return { item: manifest.weekly_reports?.find(w => w.slug === slug), type: "weekly" };
-    if (type === "deep-dive") return { item: manifest.deep_dives?.find(dd => dd.slug === slug), type: "deep-dive" };
+    const daily = manifest.daily_reports?.find(d => d.slug === slug);
+    if (daily) return { item: daily, type: "daily" };
+    const weekly = manifest.weekly_reports?.find(w => w.slug === slug);
+    if (weekly) return { item: weekly, type: "weekly" };
+    const dd = manifest.deep_dives?.find(d => d.slug === slug);
+    if (dd) return { item: dd, type: "deep-dive" };
+    const overview = manifest.overviews?.find(o => o.slug === slug);
+    if (overview) return { item: overview, type: "overview" };
   }
-
   if (type === "weekly") return { item: manifest.weekly_reports?.[0], type: "weekly" };
   if (type === "deep-dive") return { item: manifest.deep_dives?.[0], type: "deep-dive" };
   if (type === "overview") return { item: manifest.overviews?.[0], type: "overview" };
