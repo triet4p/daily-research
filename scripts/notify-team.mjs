@@ -6,6 +6,19 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
+// Auto-load .env.local if present
+const envLocalPath = path.join(rootDir, ".env.local");
+if (fs.existsSync(envLocalPath)) {
+  const envContent = fs.readFileSync(envLocalPath, "utf-8");
+  for (const line of envContent.split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const [key, ...rest] = trimmed.split("=");
+    if (key && rest.length > 0 && !process.env[key.trim()]) {
+      process.env[key.trim()] = rest.join("=").trim();
+    }
+  }
+}
 
 // Configuration
 const SITE_URL = process.env.SITE_URL || process.env.VERCEL_PROJECT_URL || "https://daily-research-two.vercel.app";
