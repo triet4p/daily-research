@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "notify": "node scripts/notify-team.mjs",
+    "notify:dry": "node scripts/notify-team.mjs --dry-run"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
