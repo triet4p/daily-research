@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
 
 // Configuration
-const SITE_URL = process.env.SITE_URL || process.env.VERCEL_PROJECT_URL || "https://daily-research.vercel.app";
+const SITE_URL = process.env.SITE_URL || process.env.VERCEL_PROJECT_URL || "https://daily-research-two.vercel.app";
 const manifestPath = path.join(rootDir, "content", "manifest.json");
 
 function parseArgs() {

@@ -3,7 +3,7 @@ import { getManifest } from "@/lib/content";
 
 export async function GET() {
   const manifest = getManifest();
-  const baseUrl = (process.env.SITE_URL || "https://daily-research.vercel.app").replace(/\/$/, "");
+  const baseUrl = (process.env.SITE_URL || "https://daily-research-two.vercel.app").replace(/\/$/, "");
 
   const items: Array<{
     title: string;
