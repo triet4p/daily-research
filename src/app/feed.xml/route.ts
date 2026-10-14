@@ -19,7 +19,7 @@ export async function GET() {
       title: `⚡ [DAILY PULSE] ${d.title}`,
       link: `${baseUrl}/daily/${d.slug}`,
       description: `${d.summary} — Kênh theo dõi: ${(d.channels_monitored || []).join(", ")}`,
-      pubDate: new Date(d.date).toUTCString(),
+      pubDate: d.slug.includes("test") ? new Date().toUTCString() : new Date(d.date).toUTCString(),
       guid: `daily-${d.slug}`,
     });
   }

@@ -50,6 +50,30 @@
   ],
   "daily_reports": [
     {
+      "id": "daily-2026-10-14-test-connection",
+      "slug": "2026-10-14-test-connection",
+      "date": "2026-10-14",
+      "day_of_week": "Thứ Tư",
+      "week_number": 42,
+      "year": 2026,
+      "title": "⚡ [TEST] Kích Hoạt Thành Công Kết Nối Daily AI Research ➔ [Team] TechInnova",
+      "subtitle": "Kiểm tra đường truyền tự động hóa: Hệ thống radar theo dõi đột phá công nghệ AI đã kết nối thành công với Microsoft Teams",
+      "reading_time": "1 phút",
+      "channels_monitored": [
+        "Microsoft Teams Workflows",
+        "Vercel CI/CD",
+        "Daily Research Hub"
+      ],
+      "tags": [
+        "Test Connection",
+        "TechInnova",
+        "System Online"
+      ],
+      "parent_weekly_id": "weekly-2026-w41",
+      "related_overview_id": "overview-2026-08-09",
+      "summary": "Kiểm tra đường truyền tự động hóa: Hệ thống theo dõi và phân tích đột phá Trí tuệ Nhân tạo đã kết nối thành công với nhóm chat [Team] TechInnova. Báo cáo hàng ngày và điểm tin nóng sẽ được tự động đồng bộ tại đây."
+    },
+    {
       "id": "daily-2026-10-14",
       "slug": "2026-10-14",
       "date": "2026-10-14",
